@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Jerilyn Boykin — Research Portfolio 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#F4F2EC;--cream-light:#F9F8F3;--forest:#1E2418;--olive:#4A5240;--sage:#8FA688;--sand:#B8C4A8;--warm-gray:#DDE0D6;--ink:#252B1F;--taupe:#7A8470;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:100%;height:100%;overflow:hidden;background:#0e0e0e;display:flex;align-items:center;justify-content:center;}
+.shell{width:1280px;height:720px;display:grid;grid-template-columns:230px 1fr;overflow:hidden;transform-origin:center center;flex-shrink:0;}
+.nav{background:#111a0e;display:flex;flex-direction:column;border-right:1px solid rgba(255,255,255,0.06);overflow:hidden;}
+.nav-top{padding:26px 22px 20px;border-bottom:1px solid rgba(255,255,255,0.07);flex-shrink:0;}
+.nav-eyebrow{font-family:'DM Mono',monospace;font-size:0.46rem;letter-spacing:0.24em;text-transform:uppercase;color:rgba(255,255,255,0.28);display:block;margin-bottom:5px;}
+.nav-name{font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:700;color:#fff;line-height:1.05;}
+.nav-name em{font-style:italic;font-weight:400;color:var(--sage);}
+.nav-role{font-family:'Crimson Pro',serif;font-size:0.75rem;font-style:italic;color:rgba(255,255,255,0.32);margin-top:4px;line-height:1.4;}
+.nav-scroll{flex:1;min-height:0;overflow-y:auto;padding:6px 0;}
+.nav-scroll::-webkit-scrollbar{width:2px;}
+.nav-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.07);}
+.nav-group{font-family:'DM Mono',monospace;font-size:0.42rem;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.18);padding:12px 22px 5px;display:block;}
+.nav-sep{height:1px;background:rgba(255,255,255,0.05);margin:5px 0;}
+.nbtn,.nav-acc-toggle{display:flex;align-items:flex-start;gap:9px;width:100%;padding:9px 22px;background:none;border:none;border-left:2px solid transparent;cursor:pointer;text-align:left;transition:background .15s,border-color .15s;}
+.nbtn:hover,.nav-acc-toggle:hover{background:rgba(255,255,255,0.03);}
+.nbtn.on,.nav-acc-toggle.on{background:rgba(143,166,136,0.09);border-left-color:var(--sage);}
+.nbtn-num{font-family:'DM Mono',monospace;font-size:0.42rem;color:rgba(255,255,255,0.16);padding-top:3px;flex-shrink:0;width:14px;text-align:right;}
+.nbtn.on .nbtn-num{color:var(--sage);}
+.nbtn-label{font-family:'Crimson Pro',serif;font-size:0.88rem;color:rgba(255,255,255,0.65);line-height:1.25;display:block;transition:color .15s;}
+.nbtn:hover .nbtn-label,.nav-acc-toggle:hover .nbtn-label{color:rgba(255,255,255,0.9);}
+.nbtn.on .nbtn-label,.nav-acc-toggle.on .nbtn-label{color:var(--cream);}
+.nbtn-sub{font-family:'DM Mono',monospace;font-size:0.4rem;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.35);display:block;margin-top:1px;}
+.nbtn.on .nbtn-sub,.nav-acc-toggle.on .nbtn-sub{color:var(--taupe);}
+.nbtn-tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:5px;}
+.nbtn-tag{font-family:'DM Mono',monospace;font-size:0.38rem;letter-spacing:0.07em;text-transform:uppercase;color:rgba(255,255,255,0.38);border:1px solid rgba(255,255,255,0.2);padding:0.1rem 0.28rem;}
+.nbtn.on .nbtn-tag{color:rgba(143,166,136,0.85);border-color:rgba(143,166,136,0.4);}
+.nav-acc-toggle{align-items:center;}
+.nav-acc-chevron{font-size:0.7rem;color:rgba(255,255,255,0.22);margin-left:auto;flex-shrink:0;transition:transform .25s,color .15s;display:inline-block;line-height:1;}
+.nav-acc-toggle.open .nav-acc-chevron{transform:rotate(90deg);}
+.nav-acc-toggle.on .nav-acc-chevron{color:var(--sage);}
+.nav-acc-body{overflow:hidden;max-height:0;transition:max-height .35s ease;}
+.nav-acc-body.open{max-height:700px;}
+.nbtn-nested{padding-left:34px;align-items:flex-start;}
+.nbtn-nested .nbtn-num{color:rgba(255,255,255,0.11);font-size:0.38rem;}
+.nbtn-nested.on .nbtn-num{color:var(--sage);}
+.nbtn-nested .nbtn-label{font-size:0.76rem;}
+.nbtn-nested.on{background:rgba(143,166,136,0.07);border-left-color:var(--sage);}
+.nav-foot{padding:12px 22px;border-top:1px solid rgba(255,255,255,0.05);flex-shrink:0;}
+.nav-foot a{display:block;font-family:'DM Mono',monospace;font-size:0.44rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.22);text-decoration:none;line-height:1.9;transition:color .15s;}
+.nav-foot a:hover{color:var(--sage);}
+.nav-credit{font-family:'DM Mono',monospace;font-size:0.38rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.1);margin-top:6px;}
+.content{position:relative;overflow:hidden;}
+.panel{display:none;position:absolute;inset:0;overflow:hidden;}
+.panel.on{display:flex;}
+#p-about{display:none;grid-template-columns:420px 1fr;background:var(--cream-light);}
+#p-about.on{display:grid !important;}
+.about-img{background:var(--warm-gray);overflow:hidden;}
+.about-img img{width:100%;height:100%;object-fit:cover;object-position:center center;transform:scale(0.75);transform-origin:center center;display:block;}
+.about-body{padding:44px 56px 28px;display:flex;flex-direction:column;justify-content:flex-start;}
+.ptitle{font-family:'Playfair Display',serif;font-size:2.3rem;font-weight:900;color:var(--forest);line-height:1.05;margin-bottom:1.4rem;}
+.ptitle em{font-style:italic;font-weight:400;color:var(--sage);}
+.about-text{font-size:1.22rem;line-height:1.85;color:var(--ink);font-weight:300;}
+.about-text p+p{margin-top:0.85rem;}
+#p-work{display:none;background:var(--forest);padding:34px 42px;flex-direction:column;}
+#p-work.on{display:flex !important;}
+.whead{padding-bottom:12px;margin-bottom:12px;border-bottom:1px solid rgba(255,255,255,0.1);}
+.whead h2{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:var(--cream);}
+.whead h2 em{color:var(--sage);font-style:italic;}
+.wcols{display:grid;grid-template-columns:1fr 290px;flex:1;}
+.wleft{padding-right:2rem;border-right:1px solid rgba(255,255,255,0.07);display:flex;flex-direction:column;justify-content:space-between;}
+.wrow{display:grid;grid-template-columns:84px 1fr;gap:0.7rem;padding:11px 0;border-bottom:1px solid rgba(255,255,255,0.06);}
+.wrow:last-of-type{border-bottom:none;}
+.wdate{font-family:'DM Mono',monospace;font-size:0.7rem;color:rgba(255,255,255,0.65);padding-top:2px;}
+.wco{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--cream);}
+.wrole{font-family:'Crimson Pro',serif;font-size:0.98rem;color:var(--sand);font-style:italic;}
+.wdept{font-family:'DM Mono',monospace;font-size:0.54rem;letter-spacing:0.07em;text-transform:uppercase;color:rgba(255,255,255,0.45);}
+.wtag{display:inline-block;font-family:'DM Mono',monospace;font-size:0.54rem;letter-spacing:0.07em;text-transform:uppercase;color:rgba(255,255,255,0.55);border:1px solid rgba(143,166,136,0.35);padding:0.1rem 0.3rem;margin-top:2px;}
+.wstats{display:flex;gap:1.4rem;padding-top:9px;margin-top:9px;border-top:1px solid rgba(255,255,255,0.07);}
+.snum{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:var(--sage);line-height:1;}
+.slbl{font-family:'DM Mono',monospace;font-size:0.42rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--taupe);margin-top:2px;}
+.wright{padding-left:2rem;display:flex;flex-direction:column;gap:1.1rem;}
+.slabel{font-family:'DM Mono',monospace;font-size:0.54rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--sage);display:block;margin-bottom:7px;}
+.edeg{font-family:'Playfair Display',serif;font-size:0.82rem;font-weight:600;color:var(--cream);}
+.esch{font-family:'DM Mono',monospace;font-size:0.44rem;letter-spacing:0.07em;text-transform:uppercase;color:var(--taupe);margin-top:1px;}
+.sklist{display:flex;flex-direction:column;gap:3px;}
+#p-values{display:none;background:var(--cream);padding:36px 50px 28px;flex-direction:column;justify-content:flex-start;}
+#p-values.on{display:flex !important;}
+.eyebrow{font-family:'DM Mono',monospace;font-size:0.5rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--sage);display:block;margin-bottom:8px;}
+.vsub{font-family:'Crimson Pro',serif;font-size:0.98rem;font-style:italic;color:var(--taupe);margin-top:5px;margin-bottom:18px;}
+.vgrid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--warm-gray);border:2px solid var(--warm-gray);}
+.vcard{background:var(--cream-light);padding:1.6rem 1.9rem;position:relative;overflow:hidden;transition:background .25s;}
+.vcard::before{content:'';position:absolute;top:0;left:0;width:3px;height:0;background:var(--sage);transition:height .3s;}
+.vcard:hover{background:#fff;}
+.vcard:hover::before{height:100%;}
+.vnum{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;color:var(--warm-gray);margin-bottom:5px;}
+.vtitle{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:600;color:var(--forest);margin-bottom:5px;}
+.vdesc{font-family:'Crimson Pro',serif;font-size:1.05rem;line-height:1.65;color:var(--taupe);font-weight:300;}
+#p-ai{display:none;grid-template-columns:1fr 1fr;}
+#p-ai.on{display:grid !important;}
+.ai-l{background:var(--forest);padding:36px 50px 28px;display:flex;flex-direction:column;justify-content:flex-start;}
+.aip{font-family:'Crimson Pro',serif;font-size:1.15rem;color:rgba(255,255,255,0.52);line-height:1.75;font-weight:300;margin-top:3rem;}
+.ai-r{background:var(--cream-light);padding:36px 50px 28px;display:flex;flex-direction:column;justify-content:center;gap:1.1rem;}
+.aih{font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:700;color:#fff;line-height:1.05;margin-top:8px;}
+.aih em{font-style:italic;font-weight:400;}
+.aip span{color:var(--sage);}
+.ai-intro{font-family:'Crimson Pro',serif;font-size:1.15rem;font-style:italic;color:var(--sage);line-height:1.6;}
+.aicard{padding:1rem 1.2rem;background:var(--cream);border-left:3px solid var(--sage);}
+.aicard-lbl{font-family:'DM Mono',monospace;font-size:0.56rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--sage);margin-bottom:4px;}
+.aicard-txt{font-family:'Crimson Pro',serif;font-size:1.08rem;line-height:1.65;color:var(--ink);font-weight:300;}
+.aitools{display:flex;flex-wrap:wrap;gap:4px;}
+.aitool{font-family:'DM Mono',monospace;font-size:0.42rem;letter-spacing:0.09em;text-transform:uppercase;color:var(--olive);border:1px solid var(--sage);padding:0.16rem 0.36rem;}
+#p-expertise{background:var(--forest);padding:80px 100px;}
+#p-expertise.on{display:flex !important;align-items:center;justify-content:center;}
+.exp-quote{font-family:'Playfair Display',serif;font-size:2rem;font-weight:400;line-height:1.55;color:var(--cream);text-align:center;max-width:820px;}
+.exp-quote em{font-style:italic;color:var(--sage);}
+#p-leadership{display:none;background:var(--cream);padding:36px 50px 28px;flex-direction:column;justify-content:flex-start;}
+#p-leadership.on{display:flex !important;}
+.aitem{border-bottom:1px solid var(--warm-gray);}
+.abtn{width:100%;background:none;border:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding:9px 0;text-align:left;}
+.alabel{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:600;color:var(--olive);transition:color .2s;}
+.abtn:hover .alabel{color:var(--forest);}
+.aitem.open .alabel{color:var(--forest);}
+.aicon{font-family:'DM Mono',monospace;font-size:1rem;color:var(--sage);flex-shrink:0;margin-left:14px;transition:transform .25s;display:inline-block;line-height:1;}
+.aitem.open .aicon{transform:rotate(45deg);}
+.abody{overflow:hidden;max-height:0;transition:max-height .3s ease,padding-bottom .3s ease;}
+.aitem.open .abody{max-height:280px;padding-bottom:14px;}
+.cs-metric{display:flex;align-items:baseline;gap:12px;margin-top:18px;}
+.cs-metric-num{font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:var(--olive);line-height:1;}
+.cs-metric-lbl{font-family:'Crimson Pro',serif;font-size:1rem;font-style:italic;color:var(--taupe);font-weight:300;line-height:1.3;white-space:nowrap;}
+.atext{font-family:'Crimson Pro',serif;font-size:1.05rem;line-height:1.7;color:var(--ink);font-weight:300;}
+.atext strong{font-weight:600;color:var(--forest);}
+.pcs{display:none;grid-template-rows:auto 1fr;}
+.pcs.on{display:grid !important;}
+.cshead{background:var(--olive);padding:19px 34px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.08);flex-shrink:0;}
+.cstitle{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:#fff;line-height:1.15;}
+.cstitle em{font-style:italic;font-weight:400;}
+.cscat{font-family:'Crimson Pro',serif;font-size:0.88rem;font-style:italic;color:var(--sage);margin-top:3px;}
+.csmethods{display:flex;flex-direction:column;gap:3px;align-items:flex-end;flex-shrink:0;padding-left:14px;}
+.csm{font-family:'DM Mono',monospace;font-size:0.41rem;letter-spacing:0.09em;text-transform:uppercase;color:rgba(255,255,255,0.48);border:1px solid rgba(255,255,255,0.18);padding:0.17rem 0.38rem;white-space:nowrap;}
+.cs-main{display:grid;grid-template-columns:1fr 380px;overflow:hidden;flex:1;}
+.cs-accord-body{background:var(--cream-light);padding:24px 44px 20px;display:flex;flex-direction:column;justify-content:flex-start;overflow-y:auto;border-right:1px solid var(--warm-gray);}
+.cs-accord-body::-webkit-scrollbar{width:2px;}
+.cs-accord-body::-webkit-scrollbar-thumb{background:var(--warm-gray);}
+.cs-img-col{background:var(--warm-gray);overflow:hidden;position:relative;}
+.csnoimg{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;}
+.csnoimg-icon{width:34px;height:34px;border:1px dashed var(--taupe);display:flex;align-items:center;justify-content:center;color:var(--taupe);font-size:0.9rem;}
+.csnoimg-lbl{font-family:'DM Mono',monospace;font-size:0.42rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--taupe);}
+#p-cs-index{display:none;background:var(--forest);padding:32px 42px 28px;flex-direction:column;align-items:stretch;}
+#p-cs-index.on{display:flex !important;}
+.csi-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:16px;}
+.csi-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:168px;gap:2px;background:rgba(255,255,255,0.05);border:2px solid rgba(255,255,255,0.05);align-content:start;}
+.csi-card{background:var(--forest);padding:1.1rem 1.3rem;cursor:pointer;border-left:2px solid transparent;transition:background .2s,border-color .2s;display:flex;flex-direction:column;position:relative;}
+.csi-card:hover{background:rgba(255,255,255,0.04);border-left-color:var(--sage);}
+.csi-card:hover .csi-arrow{opacity:1;transform:translateX(0);}
+.csi-num{font-family:'DM Mono',monospace;font-size:0.42rem;letter-spacing:0.1em;color:var(--sage);margin-bottom:6px;}
+.csi-title{font-family:'Playfair Display',serif;font-size:0.92rem;font-weight:600;color:var(--cream);line-height:1.25;margin-bottom:4px;}
+.csi-co{font-family:'DM Mono',monospace;font-size:0.4rem;letter-spacing:0.07em;text-transform:uppercase;color:var(--taupe);margin-bottom:6px;}
+.csi-cat{font-family:'Crimson Pro',serif;font-size:0.78rem;font-style:italic;color:rgba(255,255,255,0.35);line-height:1.35;flex:1;}
+.csi-tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:8px;}
+.csi-tag{font-family:'DM Mono',monospace;font-size:0.38rem;letter-spacing:0.06em;text-transform:uppercase;color:rgba(143,166,136,0.65);border:1px solid rgba(143,166,136,0.28);padding:0.1rem 0.25rem;}
+.csi-arrow{font-family:'DM Mono',monospace;font-size:0.55rem;color:var(--sage);position:absolute;bottom:1rem;right:1rem;opacity:0;transform:translateX(-4px);transition:opacity .2s,transform .2s;}
+#p-close{display:none;background:var(--forest);align-items:center;justify-content:center;flex-direction:column;}
+#p-close.on{display:flex !important;}
+.close-thanks{font-family:'Playfair Display',serif;font-size:3.6rem;font-weight:900;color:var(--cream);line-height:1.0;text-align:center;}
+.close-thanks em{font-style:italic;font-weight:400;color:var(--sage);}
+.close-sub{font-family:'Crimson Pro',serif;font-size:1.7rem;font-style:italic;font-weight:300;color:rgba(255,255,255,0.42);text-align:center;margin-top:0.6rem;margin-bottom:2.8rem;}
+.close-links{display:flex;gap:16px;align-items:center;}
+.close-link{display:flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--cream);text-decoration:none;border:1px solid rgba(255,255,255,0.18);padding:0.55rem 1.1rem;transition:background .2s,border-color .2s,color .2s;}
+.close-link:hover{background:rgba(143,166,136,0.12);border-color:var(--sage);color:var(--sage);}
+.close-divider{width:1px;height:28px;background:rgba(255,255,255,0.1);}
+
+/* CURATOR OVERLAY */
+#curator-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.82);z-index:9999;align-items:center;justify-content:center;}
+#curator-overlay.open{display:flex;}
+.curator-panel{background:#1a2115;border:1px solid rgba(143,166,136,0.25);width:540px;max-height:80vh;display:flex;flex-direction:column;box-shadow:0 24px 60px rgba(0,0,0,0.6);}
+.curator-head{padding:18px 24px 14px;border-bottom:1px solid rgba(255,255,255,0.07);flex-shrink:0;display:flex;align-items:center;justify-content:space-between;}
+.curator-head-title{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--cream);}
+.curator-head-title em{font-style:italic;font-weight:400;color:var(--sage);}
+.curator-hint{font-family:'DM Mono',monospace;font-size:0.4rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.22);}
+.curator-body{overflow-y:auto;flex:1;padding:8px 0;}
+.curator-body::-webkit-scrollbar{width:2px;}
+.curator-body::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.07);}
+.curator-row{display:flex;align-items:center;gap:12px;padding:9px 24px;border-left:2px solid transparent;transition:background .15s;}
+.curator-row:hover{background:rgba(255,255,255,0.03);}
+.curator-row.hidden-case{opacity:0.38;}
+.curator-vis{width:26px;height:26px;border:1px solid rgba(255,255,255,0.2);background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:border-color .15s,background .15s;}
+.curator-vis.on{background:rgba(143,166,136,0.18);border-color:var(--sage);}
+.curator-vis svg{pointer-events:none;}
+.curator-info{flex:1;min-width:0;}
+.curator-case-title{font-family:'Crimson Pro',serif;font-size:0.92rem;color:var(--cream);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.curator-case-co{font-family:'DM Mono',monospace;font-size:0.38rem;letter-spacing:0.07em;text-transform:uppercase;color:var(--taupe);margin-top:1px;}
+.curator-drag-handle{width:22px;display:flex;align-items:center;justify-content:center;cursor:grab;color:rgba(255,255,255,0.2);flex-shrink:0;transition:color .15s;}
+.curator-drag-handle:hover{color:var(--sage);}
+.curator-row{cursor:default;}
+.curator-row.dragging{opacity:0.4;background:rgba(143,166,136,0.08);}
+.curator-row.drag-over{border-left-color:var(--sage);background:rgba(143,166,136,0.06);}
+.curator-section{font-family:'DM Mono',monospace;font-size:0.4rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.2);padding:10px 24px 4px;display:block;}
+.curator-foot{padding:12px 24px;border-top:1px solid rgba(255,255,255,0.07);flex-shrink:0;display:flex;align-items:center;justify-content:space-between;}
+.curator-count{font-family:'DM Mono',monospace;font-size:0.42rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.3);}
+.curator-done,.curator-export{font-family:'DM Mono',monospace;font-size:0.48rem;letter-spacing:0.14em;text-transform:uppercase;background:none;padding:0.4rem 1rem;cursor:pointer;transition:background .15s,color .15s;}
+.curator-done{color:var(--sage);border:1px solid rgba(143,166,136,0.4);}
+.curator-done:hover{background:rgba(143,166,136,0.15);}
+.curator-export{color:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.15);margin-right:8px;}
+.curator-export:hover{background:rgba(255,255,255,0.06);color:var(--cream);border-color:rgba(255,255,255,0.3);}
+
+
+/* PRINT / PDF EXPORT */
+@media print {
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  html, body { width:100%; height:auto; overflow:visible; background:#fff; display:block; }
+  .shell { width:100%; height:auto; display:block; transform:none !important; }
+  .nav, #curator-overlay { display:none !important; }
+  .content { position:static; overflow:visible; width:100%; }
+  .panel {
+    display:block !important;
+    position:static !important;
+    width:100%;
+    height:auto !important;
+    min-height:100vh;
+    page-break-after:always;
+    overflow:visible !important;
+  }
+  .panel.print-hidden { display:none !important; }
+  /* Expand all accordions */
+  .abody { max-height:none !important; padding-bottom:14px !important; }
+  .aitem.open .abody, .abody { max-height:none !important; }
+  /* Fix grid/flex heights */
+  #p-about { display:grid !important; min-height:100vh; }
+  #p-work { display:flex !important; min-height:100vh; }
+  #p-values { display:flex !important; min-height:100vh; }
+  #p-ai { display:grid !important; min-height:100vh; }
+  #p-leadership { display:flex !important; min-height:100vh; }
+  #p-expertise { display:flex !important; min-height:100vh; }
+  #p-cs-index { display:none !important; }
+  #p-close { display:flex !important; min-height:60vh; page-break-after:avoid; }
+  .csi-click-hint { display:none !important; }
+  #p-cs-toc { display:block !important; min-height:auto; page-break-after:always; background:var(--forest) !important; padding:48px 64px; }
+  .toc-eyebrow-print { font-family:'DM Mono',monospace; font-size:0.52rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--sage); display:block; margin-bottom:10px; }
+  .toc-title-print { font-family:'Playfair Display',serif; font-size:2rem; font-weight:900; color:var(--cream); line-height:1.05; margin-bottom:28px; }
+  .toc-title-print em { font-style:italic; font-weight:400; color:var(--sage); }
+  .toc-list { border-top:1px solid rgba(255,255,255,0.08); }
+  .toc-item { display:grid; grid-template-columns:32px 1fr 180px 140px; gap:16px; align-items:baseline; padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.06); }
+  .toc-num { font-family:'DM Mono',monospace; font-size:0.5rem; letter-spacing:0.1em; color:var(--sage); }
+  .toc-name { font-family:'Playfair Display',serif; font-size:0.95rem; font-weight:600; color:var(--cream); line-height:1.3; }
+  .toc-cat { font-family:'Crimson Pro',serif; font-size:0.82rem; font-style:italic; color:rgba(255,255,255,0.4); }
+  .toc-co { font-family:'DM Mono',monospace; font-size:0.42rem; letter-spacing:0.07em; text-transform:uppercase; color:var(--taupe); text-align:right; }
+  .pcs { display:grid !important; min-height:100vh; }
+  .cs-main { overflow:visible !important; }
+  .cs-accord-body { overflow:visible !important; }
+  .cs-img-col { min-height:400px; }
+  .wcols { flex:none; }
+  .vgrid { break-inside:avoid; }
+}
+
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="nav">
+    <div class="nav-top">
+      <span class="nav-eyebrow">Research Portfolio &middot; 2026</span>
+      <div class="nav-name">Jerilyn Boykin</div>
+      <div class="nav-role">Mixed Methods Researcher</div>
+    </div>
+    <div class="nav-scroll" id="navScroll">
+      <span class="nav-group">Profile</span>
+      <button class="nbtn on" data-panel="p-about"><span class="nbtn-num"></span><span class="nbtn-label">About Me</span></button>
+      <button class="nbtn" data-panel="p-work"><span class="nbtn-num"></span><span class="nbtn-label">Work History</span></button>
+      <button class="nbtn" data-panel="p-expertise"><span class="nbtn-num"></span><span class="nbtn-label">My Expertise</span></button>
+      <div class="nav-sep"></div>
+      <span class="nav-group" id="approachNavGroup">Approach</span>
+      <div id="approachNav"></div>
+      <div class="nav-sep"></div>
+      <span class="nav-group">Selected Work</span>
+    </div>
+    <div class="nav-foot">
+      <a href="mailto:jerilyn.boykin@gmail.com">jerilyn.boykin@gmail.com</a>
+      <a href="https://www.linkedin.com/in/jjboykin/" target="_blank">LinkedIn</a>
+      <div class="nav-credit">content by me &middot; design by claude</div>
+    </div>
+  </nav>
+  <div class="content">
+    <div class="panel on" id="p-about">
+      <div class="about-img"><img src="aboutme.jpg" alt="Jerilyn Boykin"></div>
+      <div class="about-body">
+        <div class="ptitle">About <em>Me</em></div>
+        <div class="about-text">
+          <p>Born and raised in Los Angeles, I’ve always been naturally curious about people: what drives them, what they choose, and why. That instinct to observe and understand is what led me to a career in research.</p>
+          <p>Currently I’m based in Brooklyn, a city that inspires me every day. The people here are endlessly interesting to observe — everyone moving with purpose, style, and their own story. After hours and on the weekends I stay busy exploring fashion trends, baking, and listening to podcasts.</p>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="p-work">
+      <div class="whead"><h2>Work <em>History</em></h2></div>
+      <div class="wcols" style="flex:1;">
+        <div class="wleft">
+          <div>
+            <div class="wrow"><span class="wdate">2023&ndash;Now</span><div><div class="wco">Block</div><div class="wrole">Market Insights Researcher</div><div class="wdept">Cash App &amp; Afterpay</div><span class="wtag">Fin-tech</span></div></div>
+            <div class="wrow"><span class="wdate">2020&ndash;2023</span><div><div class="wco">Meta</div><div class="wrole">Market Insights Researcher</div><div class="wdept">Instagram</div><span class="wtag">Social Media / Tech</span></div></div>
+            <div class="wrow"><span class="wdate">2018&ndash;2020</span><div><div class="wco">Viacom</div><div class="wrole">Sr. Director of Insights</div><div class="wdept">BET</div><span class="wtag">Entertainment / Media</span></div></div>
+            <div class="wrow"><span class="wdate">2016&ndash;2018</span><div><div class="wco">Tory Burch</div><div class="wrole">Sr. Manager, Market Research</div><span class="wtag">Fashion / Retail</span></div></div>
+            <div class="wrow"><span class="wdate">2014&ndash;2016</span><div><div class="wco">Neiman Marcus Group</div><div class="wrole">Manager, Market Research</div><span class="wtag">Fashion / Retail</span></div></div>
+          </div>
+          <div class="wstats">
+            <div><div class="snum">10+</div><div class="slbl">Years</div></div>
+            <div><div class="snum">5</div><div class="slbl">Companies</div></div>
+            <div><div class="snum">4</div><div class="slbl">Industries</div></div>
+          </div>
+        </div>
+        <div class="wright">
+          <div>
+            <span class="slabel">Education</span>
+            <div style="display:flex;flex-direction:column;gap:7px;">
+              <div><div class="edeg">M.S. Statistical Science</div><div class="esch">Southern Methodist University</div></div>
+              <div><div class="edeg">B.A. Mathematics</div><div class="esch">Texas Tech University</div></div>
+            </div>
+          </div>
+          <div>
+            <span class="slabel">Skills</span>
+            <div class="sklist">
+              <span class="wtag">Survey Design</span><span class="wtag">Qual Moderation</span>
+              <span class="wtag">Usability Testing</span><span class="wtag">A/B Testing</span>
+              <span class="wtag">Conjoint, Maxdiff &amp; TURF</span><span class="wtag">Vendor Management</span>
+              <span class="wtag">Regression Modeling</span><span class="wtag">Longitudinal Tracking</span>
+              <span class="wtag">SPSS / SAS / Qualtrics</span><span class="wtag">Research Roadmap Dev.</span>
+              <span class="wtag">Stakeholder Influence</span><span class="wtag">AI-Assisted Research</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="p-values">
+      <span class="eyebrow">Research Philosophy</span>
+      <div class="ptitle" style="font-size:2.1rem;margin-bottom:2px;">How I <em>approach</em> the work</div>
+      <p class="vsub">Four principles that guide every study, regardless of timeline or scope.</p>
+      <div class="vgrid">
+        <div class="vcard"><div class="vnum">01</div><div class="vtitle">Stakeholder Alignment</div><p class="vdesc">Understand the decisions research needs to inform. Refine questions to ensure insights drive action, not just reports.</p></div>
+        <div class="vcard"><div class="vnum">02</div><div class="vtitle">Method&ndash;Question Fit</div><p class="vdesc">Select methods based on the decision and level of certainty required, not habit or preference.</p></div>
+        <div class="vcard"><div class="vnum">03</div><div class="vtitle">Minimum Viable Research</div><p class="vdesc">Move quickly with the lightest study that can confidently answer the question. Speed and rigor aren’t opposites.</p></div>
+        <div class="vcard"><div class="vnum">04</div><div class="vtitle">Prioritizing Rigor</div><p class="vdesc">Maintain strong fundamentals: clear hypotheses, sound sampling, and disciplined analysis, even under tight timelines.</p></div>
+      </div>
+    </div>
+    <div class="panel" id="p-ai">
+      <div class="ai-l">
+        <span class="eyebrow">Applied Skills</span>
+        <div class="aih">AI in <em>Research</em></div>
+        <div class="aip">My take on AI: the buzz is scary, but it’s inevitable. I embrace it more every day (and sometimes really love it).<br><br>While I enjoy combing through data and refining survey questions, <span>my real value lies in intuition, judgment, and a deep understanding of the people I’m building for.</span><br><br>I want AI to make me better, to give me time back and make my work more accessible. That’s how I’m using it today.</div>
+      </div>
+      <div class="ai-r">
+        <p class="ai-intro" style="font-size:1.5rem;">How I use AI:</p>
+        <div class="aicard"><div class="aicard-lbl">Brief &amp; Survey Development</div><div class="aicard-txt">First-draft discussion guides, surveys, and briefs.</div></div>
+        <div class="aicard"><div class="aicard-lbl">Synthesis &amp; Analysis</div><div class="aicard-txt">AI-assisted lit reviews, competitive research, and cross-tabulations.</div></div>
+        <div class="aicard"><div class="aicard-lbl">Building Custom Agents</div><div class="aicard-txt">Turned a biannual commerce tracker into an always-on resource: a custom agent that lets stakeholders query for specific data points on demand.</div></div>
+        <div class="aitools"><span class="aitool">Automated Analysis</span><span class="aitool">Custom Agents</span><span class="aitool">Goose</span><span class="aitool">Claude</span><span class="aitool">ChatGPT</span><span class="aitool">Gemini</span></div>
+      </div>
+    </div>
+    <div class="panel" id="p-leadership">
+      <span class="eyebrow">Research Leadership</span>
+      <div class="ptitle" style="font-size:2rem;margin-bottom:3px;">Experienced across both <em>manager and senior IC</em> tracks.</div>
+      <p class="vsub">Owning research strategy, infrastructure, researcher mentorship, and organizational influence.</p>
+      <div class="vgrid" style="margin-top:1.5rem;">
+        <div class="vcard"><div class="vtitle">Strategic Roadmap Leadership</div><p class="vdesc"><strong>Defined research roadmaps</strong>, balancing inbound product and marketing requests with foundational opportunities and anticipating business needs.</p></div>
+        <div class="vcard"><div class="vtitle">Organizational Influence</div><p class="vdesc"><strong>Advised on OKR and KPI development.</strong> Authored white papers and tracking studies with influence reaching <strong>CMO level</strong>.</p></div>
+        <div class="vcard"><div class="vtitle">People Development</div><p class="vdesc"><strong>Managed, mentored, and developed junior researchers</strong>, maintaining quality standards and connecting research to business strategy.</p></div>
+        <div class="vcard"><div class="vtitle">Team Excellence</div><p class="vdesc">Up-leveled team impact through implementation of new research programs (e.g., rapid research panel, NPS tracking) and participation in team-wide critique and feedback sessions.</p></div>
+      </div>
+    </div>
+    <div class="panel" id="p-expertise">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:2rem;">
+        <div style="font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--sage);">Marketing &nbsp;|&nbsp; Product</div>
+        <div class="exp-quote">My expertise sits at the intersection of marketing and product: understanding not just how people use and experience products, but what drives the decisions they make, what they believe about brands, and how all of it connects to business outcomes.</div>
+      </div>
+    </div>
+    <div class="panel" id="p-close">
+      <div class="close-thanks">Thanks for <em>reading.</em></div>
+      <div class="close-sub">Want to dig deeper?</div>
+      <div class="close-links">
+        <a class="close-link" href="mailto:jerilyn.boykin@gmail.com">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+          jerilyn.boykin@gmail.com
+        </a>
+        <div class="close-divider"></div>
+        <a class="close-link" href="https://www.linkedin.com/in/jjboykin/" target="_blank">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+    <div id="p-cs-toc" style="display:none;position:absolute;inset:0;overflow:hidden;background:var(--forest);padding:48px 64px;flex-direction:column;">
+      <span class="toc-eyebrow-print">Selected Work</span>
+      <div class="toc-title-print">Case <em>Studies</em></div>
+      <div class="toc-list" id="tocList"></div>
+    </div>
+    <div id="csPanels"></div>
+  
+<div id="curator-overlay">
+  <div class="curator-panel">
+    <div class="curator-head">
+      <div class="curator-head-title">Curate <em>Selected Work</em></div>
+      <div class="curator-hint">Shift+E to close</div>
+    </div>
+    <div class="curator-body" id="curatorBody">
+      <span class="curator-section">Approach</span>
+      <div id="curatorApproach"></div>
+      <span class="curator-section" style="margin-top:6px;">Selected Work</span>
+      <div id="curatorCases"></div>
+    </div>
+    <div class="curator-foot">
+      <div class="curator-count" id="curatorCount"></div>
+      <button class="curator-export" id="curatorExportBtn">Export PDF</button><button class="curator-done" id="curatorDoneBtn">Done</button>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<script>
+var CASES=[
+  {id:1,title:"Cash App \u201cCash In\u201d Campaign",titleHtml:'Cash App <em>\u201cCash In\u201d</em> Campaign',cat:"Brand & Product Campaign Influence",co:"Block \xb7 2025",methods:["Message Testing","A/B Creative Testing","Measurement"],img:"cashin_hero.png",img2:"cashin1.png",img3:"cashin2.png",imgPos:"center center",heroLayout:true,approach:"Cash App was primarily known as a peer-to-peer payments platform, but growth increasingly depended on driving adoption of its banking products. To meet this challenge, <strong>the company launched its largest-ever campaign \u2014 a $15M hybrid brand and product effort designed to bridge cultural resonance with banking credibility.</strong>",role:"As the brand research lead, I advised cross-functional marketing partners through the full campaign lifecycle \u2014 informing messaging, creative direction, and measurement.",impact:"Research identified which banking products to prioritize based on credibility correlation and awareness gaps. Qualitative findings directly shaped the campaign\u2019s tone and messaging. Creative testing surfaced product visibility issues that informed new video cuts. The campaign delivered <strong>8\u201314% lifts</strong> in awareness and consideration of featured banking products.",metric:"8\u201314%",metricLabel:"lifts in key metrics"},
+  {id:2,title:"Launching BET+ Streaming Service",titleHtml:"Launching <em>BET+</em> Streaming Service",cat:"0-to-1 Product Research",co:"Viacom \xb7 2019",methods:["TURF Analysis","Focus Groups","Usability"],img:"betplus_hero.png",imgPos:"center center",approach:"BET, the largest American media brand dedicated to Black culture and entertainment, set out in 2018 to enter the streaming market with BET+, a new SVOD service targeting Black and Latinx audiences. <strong>This new product was to be built, in roughly 6 months, by a team with deep linear TV expertise but no prior direct-to-consumer streaming experience.</strong> The goal: surpass 1M subscribers in year one.",role:"I designed and pitched a phased mixed-methods research plan to senior leadership, managed two junior researchers, directed a TURF analysis to optimize the content library, and oversaw focus groups and usability testing of the MVP.",impact:"BET+ surpassed its year-one subscriber goal <strong>two months early</strong>. Titles surfaced through TURF analysis became the most-viewed content post-launch. Research shaped in-product content categorization and informed which titles to lead with in acquisition channels to support a higher price point.",metric:"1M",metricLabel:"subscribers \u2014 2 months early"},
+  {id:3,title:"Afterpay Brand Diagnosis & Growth Strategy",titleHtml:"Afterpay Brand <em>Diagnosis</em> & Growth Strategy",cat:"Cross-functional Research Leadership",co:"Block \xb7 2025",methods:["Synthesis & Analysis","Stakeholder Influence","XFN Leadership"],img:"ap_diagnosis1.png",img2:"ap_diagnosis2.png",img3:"ap_diagnosis3.png",img4:"ap_diagnosis4.png",imgPos:"center center",stackLayout:true,approach:"Block acquired Afterpay in 2022 with the vision of integrating its buy now, pay later services into Cash App. Despite the 2025 effort to converge the 2 brands, cross-brand adoption remained limited and Afterpay\u2019s growth had slowed. <strong>The CMO (and Afterpay founder) needed a clearer picture of where the brand stood, why performance had softened, and where the greatest opportunities lay for reigniting growth.</strong>",role:"Rather than commission new research, I coordinated a cross-functional tiger team across Market Insights, UX, Data Science, and VOC to synthesize existing data and third-party intelligence into a comprehensive state-of-the-brand assessment.",impact:"We presented a strategic narrative - covering brand health, market position, and performance drivers directly to the CMO, who aligned on the strategy and direction for H2. I also secured sign-off on an H2 research roadmap including new foundational research: brand identity, equity tracking, behavioral segmentation, and journey mapping - all centered on an audience-based strategy.",metric:"4",metricLabel:"new foundational studies added to roadmap"},
+  {id:4,title:"Afterpay Pricing Opportunities",titleHtml:"Afterpay <em>Pricing</em> Opportunities",cat:"Product Development",co:"Block \xb7 2026",methods:["Conjoint","AI-Assisted Qual","Stakeholder Influence"],img:"ap_pricing1.png",img2:"ap_pricing2.png",img3:"afterpay_card.png",imgPos:"center top",pricingLayout:true,approach:"Afterpay pioneered BNPL in the US, but as the category matured, competitors pulled ahead with products that expanded how and where buy-now-pay-later is used. To catch up, <strong>Afterpay set out to launch a new card product, needing research to inform pricing and product construct before design sprints and engineering work began.</strong>",role:"I persuaded design leads to hold development pending findings, ran rapid AI-assisted qualitative research to establish an early POV on card format, and managed an external vendor through a full conjoint study.",impact:"Delivered card format direction in <strong>two days</strong>, leading to physical card being prioritized over virtual. The conjoint identified optimal MVP attributes - subscription price, order minimums, and benefits - and informed in-product placement of the new card relative to existing Afterpay payment options.",metric:"2 day",metricLabel:"turnaround for product direction"},
+  {id:5,title:"Afterpay Mobile App Integration",titleHtml:"Afterpay <em>Mobile App</em> Integration",cat:"Product Strategy Research",co:"Block \xb7 2025",methods:["Quant Survey","AI Analysis","Stakeholder Influence"],img:"afterpay_mobile.png",img2:"cash_mobile.png",imgPos:"center top",sideBySide:true,approach:"Block was evaluating whether to bring Afterpay\u2019s shopping and discovery features into the Cash App ecosystem \u2014 a significant product and engineering investment, and a potentially disruptive shift for Afterpay\u2019s existing user base. <strong>Teams assumed Afterpay users would not be open to moving their activity to Cash App. The brief was to validate. I had other ideas.</strong>",role:"Rather than validate that assumption, I reframed it as a testable hypothesis and designed a quantitative survey to understand what was actually driving behavior in Afterpay mobile, and what needed to be true in the Cash App experience to drive migration.",impact:"Research revealed that shopping wasn\u2019t a core job in Afterpay mobile \u2014 but it was deeply woven into the user\u2019s mental model. So deeply that Cash App would need to match the experience entirely \u2014 or risk losing users in the transition. Product <strong>postponed the integration indefinitely</strong>, avoiding a costly and premature engineering investment.",metric:"$0",metricLabel:"engineering investment \u2014 integration paused"},
+  {id:6,title:"Understanding Needs of Black Creators",titleHtml:"Understanding Needs of <em>Black Creators</em>",cat:"Generative Research",co:"Instagram \xb7 2020",methods:["Qualitative IDIs","Vendor Mgmt"],img:"creators1.jpg",img2:"creators2.png",imgPos:"center top",approach:"Black creators have been foundational to Instagram\u2019s culture since its earliest days, shaping trends, often without proportional credit or compensation. As the influencer economy matured and the 2020 racial justice reckoning intensified pressure on platforms to act, <strong>Instagram needed to move beyond assumptions and develop a genuine, evidence-based understanding of Black creators\u2019 experiences.</strong>",role:"Executed qualitative IDIs with Black creators, sourcing a vendor with specialty in overlooked and hard-to-reach populations, managing a rigorous recruitment process with Data Science, and navigating a sensitive review with Policy and Comms to ensure research stayed compliant without softening the findings.",impact:"Research surfaced disparities in pay, visibility, and brand access, and revealed the competitive threat from YouTube, TikTok, OnlyFans, and Patreon to Black creator loyalty. Findings directly informed creator funds, Reels incentive bonuses, Black creator collective partnerships, <strong>#BlackOwned highlights</strong>, and internal conversations about algorithmic bias.",metric:"13M",metricLabel:"combined followers across 30+ Black creators interviewed"},
+  {id:7,title:"Cash App Website Redesign",titleHtml:"Cash App <em>Website Redesign</em>",cat:"Design Evaluation",co:"Block \xb7 2025",methods:["Prototype Testing","Survey Research","Cross-Org Alignment"],img:"reskin1.png",img2:"reskin2.png",img3:"reskin3.png",imgPos:"center top",zigzagLayout:true,approach:"Cash App\u2019s creative team was driving toward a maturation of the brand aesthetic, a deliberate effort to position Cash App as more credible. But early into the reskin test, site metrics showed the new design underperforming. <strong>Growth Marketing pushed to revert; Creative pushed for iterative refinement.</strong> <strong>With no time for an A/B site intercept survey, the teams were at an impasse, and needed an insights-based resolution fast.</strong>",role:"I reframed the conflict as a researchable question, rallied Growth and Creative stakeholders around a research-led path, and designed a rapid A/B prototype test to isolate which design elements were driving the underperformance.",impact:"Research pinpointed the specific design issues: key art and product imagery and excessive negative space that triggered scam associations \u2014 both undermining credibility and contributing to early site abandonment. The findings resolved the deadlock, and established a new measurement framework used to evaluate subsequent site design iterations.",metric:"16%",metricLabel:"lift in mobile site attributed app downloads"}
+];
+var navScroll=document.getElementById('navScroll');
+var csPanels=document.getElementById('csPanels');
+var csAccToggle=document.createElement('button');
+csAccToggle.className='nav-acc-toggle';
+csAccToggle.dataset.panel='p-cs-index';
+csAccToggle.innerHTML='<span class="nbtn-num"></span><span style="flex:1"><span class="nbtn-label">Selected Work</span><span class="nbtn-sub">'+CASES.length+' case studies</span></span><span class="nav-acc-chevron">&#x203A;</span>';
+navScroll.appendChild(csAccToggle);
+var csAccBody=document.createElement('div');
+csAccBody.className='nav-acc-body';
+navScroll.appendChild(csAccBody);
+var sep2=document.createElement('div');sep2.className='nav-sep';navScroll.appendChild(sep2);
+var closeBtn=document.createElement('button');closeBtn.className='nbtn';closeBtn.dataset.panel='p-close';
+closeBtn.innerHTML='<span class="nbtn-num"></span><span class="nbtn-label">Contact</span>';
+navScroll.appendChild(closeBtn);
+var csIndexPanel=document.createElement('div');
+csIndexPanel.className='panel';csIndexPanel.id='p-cs-index';
+var cards=CASES.map(function(c){return '<div class="csi-card" data-panel="p-cs'+c.id+'"><div class="csi-num">'+String(c.id).padStart(2,'0')+'</div><div class="csi-title">'+c.title+'</div><div class="csi-co">'+c.co+'</div><div class="csi-cat">'+c.cat+'</div><div class="csi-tags">'+c.methods.map(function(m){return '<span class="csi-tag">'+m+'</span>';}).join('')+'</div><span class="csi-arrow">\u2192</span></div>';}).join('');
+csIndexPanel.innerHTML='<div class="csi-header"><div><span class="eyebrow" style="color:var(--sage);">Selected Work</span><div class="ptitle" style="font-size:2rem;color:var(--cream);margin-bottom:0;">Case <em style="color:var(--sage);font-weight:400;">Studies</em></div></div><div class=\"csi-click-hint\" style="font-family:\'Crimson Pro\',serif;font-size:0.92rem;font-style:italic;color:rgba(255,255,255,0.28);align-self:flex-end;">Click any card to read the full story \u2192</div></div><div class="csi-grid">'+cards+'</div>';
+csPanels.appendChild(csIndexPanel);
+CASES.forEach(function(c){
+  var pid='p-cs'+c.id;
+  var btn=document.createElement('button');btn.className='nbtn nbtn-nested';btn.dataset.panel=pid;
+  btn.innerHTML='<span class="nbtn-num">'+String(c.id).padStart(2,'0')+'</span><span style="flex:1"><span class="nbtn-label">'+c.title+'</span><span class="nbtn-sub">'+c.co+'</span></span>';
+  csAccBody.appendChild(btn);
+  var ih;
+  if(c.stackLayout){ih='<div style="width:100%;height:100%;position:relative;background:var(--warm-gray);overflow:hidden;"><img src="'+c.img4+'" style="position:absolute;top:13%;left:2%;width:62%;object-fit:cover;object-position:center top;box-shadow:0 4px 16px rgba(0,0,0,0.2);z-index:1;"><img src="'+c.img3+'" style="position:absolute;top:26%;left:26%;width:62%;object-fit:cover;object-position:center top;box-shadow:0 4px 18px rgba(0,0,0,0.24);z-index:2;"><img src="'+c.img2+'" style="position:absolute;top:39%;left:4%;width:62%;object-fit:cover;object-position:center top;box-shadow:0 4px 20px rgba(0,0,0,0.26);z-index:3;"><img src="'+c.img+'" style="position:absolute;top:52%;left:28%;width:62%;object-fit:cover;object-position:center top;box-shadow:0 4px 22px rgba(0,0,0,0.3);z-index:4;"></div>';}
+  else if(c.heroLayout){ih='<div style="width:100%;height:100%;position:relative;background:var(--warm-gray);overflow:hidden;"><img src="'+c.img+'" style="position:absolute;top:20px;left:50%;transform:translateX(-50%);width:92%;object-fit:contain;box-shadow:0 4px 16px rgba(0,0,0,0.18);z-index:1;"><img src="'+c.img2+'" style="position:absolute;bottom:80px;left:12%;width:43%;object-fit:cover;object-position:center top;box-shadow:0 6px 20px rgba(0,0,0,0.2);z-index:2;max-height:65%;"><img src="'+c.img3+'" style="position:absolute;bottom:60px;left:44%;width:43%;object-fit:cover;object-position:center top;box-shadow:0 6px 20px rgba(0,0,0,0.25);z-index:3;max-height:65%;"></div>';}
+  else if(c.zigzagLayout){ih='<div style="width:100%;height:100%;position:relative;background:var(--warm-gray);overflow:hidden;"><img src="'+c.img+'" style="position:absolute;top:16%;left:2%;width:68%;object-fit:cover;object-position:center top;box-shadow:0 4px 16px rgba(0,0,0,0.22);z-index:1;"><img src="'+c.img2+'" style="position:absolute;top:32%;left:24%;width:68%;object-fit:cover;object-position:center top;box-shadow:0 4px 18px rgba(0,0,0,0.26);z-index:2;"><img src="'+c.img3+'" style="position:absolute;top:48%;left:6%;width:68%;object-fit:cover;object-position:center top;box-shadow:0 4px 20px rgba(0,0,0,0.3);z-index:3;"></div>';}
+  else if(c.img2&&c.sideBySide){var h=c.largeImages?'72':'58';ih='<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;gap:12px;padding:24px;background:var(--warm-gray);"><img src="'+c.img+'" style="height:'+h+'%;width:auto;object-fit:contain;box-shadow:0 4px 20px rgba(0,0,0,0.15);"><img src="'+c.img2+'" style="height:'+h+'%;width:auto;object-fit:contain;box-shadow:0 4px 20px rgba(0,0,0,0.15);"></div>';}
+  else if(c.pricingLayout){ih='<div style="width:100%;height:100%;position:relative;background:var(--warm-gray);overflow:hidden;"><img src="'+c.img+'" style="position:absolute;top:20%;left:2%;width:64%;object-fit:cover;object-position:center top;box-shadow:0 6px 24px rgba(0,0,0,0.2);z-index:1;"><img src="'+c.img2+'" style="position:absolute;top:calc(20% + 22px);left:34%;width:64%;object-fit:cover;object-position:center top;box-shadow:0 6px 24px rgba(0,0,0,0.25);z-index:2;"><img src="'+c.img3+'" style="position:absolute;bottom:8%;left:50%;transform:translateX(-50%);height:44%;width:auto;object-fit:contain;box-shadow:0 6px 24px rgba(0,0,0,0.25);z-index:3;"></div>';}
+  else if(c.img2){ih='<div style="width:100%;height:100%;position:relative;background:var(--warm-gray);overflow:hidden;"><img src="'+c.img+'" style="position:absolute;top:50%;transform:translateY(-55%);left:4%;width:46%;object-fit:cover;object-position:center top;box-shadow:0 6px 24px rgba(0,0,0,0.2);z-index:1;"><img src="'+c.img2+'" style="position:absolute;top:50%;transform:translateY(-35%);left:36%;width:46%;object-fit:cover;object-position:center top;box-shadow:0 6px 24px rgba(0,0,0,0.25);z-index:2;"></div>';}
+  else if(c.img){ih='<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:28px;background:var(--warm-gray);"><img src="'+c.img+'" style="max-width:100%;max-height:100%;object-fit:contain;object-position:'+(c.imgPos||'center center')+';display:block;box-shadow:0 4px 20px rgba(0,0,0,0.15);"></div>';}
+  else{ih='<div class="csnoimg"><div class="csnoimg-icon">+</div><span class="csnoimg-lbl">Add image</span></div>';}
+  var panel=document.createElement('div');panel.className='panel pcs';panel.id=pid;
+  panel.innerHTML='<div class="cshead"><div><div class="cstitle">'+c.titleHtml+'</div><div class="cscat">'+c.cat+' \xb7 '+c.co+'</div></div><div class="csmethods">'+c.methods.map(function(m){return '<span class="csm">'+m+'</span>';}).join('')+'</div></div><div class="cs-main"><div class="cs-accord-body"><p class="atext" style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--warm-gray);">'+c.approach+'</p><div class="aitem"><button class="abtn" data-accord><span class="alabel">My Role</span><span class="aicon">+</span></button><div class="abody"><p class="atext">'+c.role+'</p></div></div><div class="aitem"><button class="abtn" data-accord><span class="alabel">Impact</span><span class="aicon">+</span></button><div class="abody"><p class="atext">'+c.impact+'</p><div class="cs-metric"><span class="cs-metric-num">'+c.metric+'</span><span class="cs-metric-lbl">'+c.metricLabel+'</span></div></div></div></div><div class="cs-img-col">'+ih+'</div></div>';
+  csPanels.appendChild(panel);
+});
+document.addEventListener('click',function(e){
+  var abtn=e.target.closest('[data-accord]');
+  if(abtn){var item=abtn.closest('.aitem');var was=item.classList.contains('open');document.querySelectorAll('.aitem').forEach(function(i){i.classList.remove('open');});if(!was)item.classList.add('open');return;}
+  var btn=e.target.closest('[data-panel]');
+  if(!btn)return;
+  var pid=btn.dataset.panel;
+  var isToggle=(btn===csAccToggle);
+  if(isToggle){var wasOpen=csAccBody.classList.contains('open');csAccBody.classList.toggle('open',!wasOpen);csAccToggle.classList.toggle('open',!wasOpen);if(wasOpen)return;}
+  else if(pid.startsWith('p-cs')){csAccBody.classList.add('open');csAccToggle.classList.add('open');}
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('on');});
+  var target=document.getElementById(pid);if(target)target.classList.add('on');
+  document.querySelectorAll('.nbtn,.nav-acc-toggle').forEach(function(b){b.classList.remove('on');});
+  if(pid.startsWith('p-cs')){csAccToggle.classList.add('on');var nested=csAccBody.querySelector('[data-panel="'+pid+'"]');if(nested)nested.classList.add('on');}
+  else{var match=document.querySelector('.nbtn[data-panel="'+pid+'"]');if(match)match.classList.add('on');else csAccToggle.classList.add('on');}
+});
+function scaleToFit(){var s=document.querySelector('.shell');var sc=Math.min(window.innerWidth/1280,window.innerHeight/720);s.style.transform='scale('+sc+')';}
+scaleToFit();
+window.addEventListener('resize',scaleToFit);
+
+// ── Curator ───────────────────────────────────────────────────────────────────
+var APPROACH = [
+  {id:'p-values', label:'Research Philosophy'},
+  {id:'p-ai',     label:'AI in Research'},
+  {id:'p-leadership', label:'Research Leadership'}
+];
+var approachState = APPROACH.map(function(a){ return {id:a.id, label:a.label, visible:true}; });
+var curatorState = CASES.map(function(c){ return {id: c.id, visible: true}; });
+
+function getCaseById(id){
+  return CASES.find(function(c){ return c.id === id; });
+}
+
+function applyApproachNav(){
+  var container = document.getElementById('approachNav');
+  if(!container) return;
+  container.innerHTML = '';
+  approachState.forEach(function(s){
+    if(!s.visible) return;
+    var btn = document.createElement('button');
+    btn.className = 'nbtn';
+    btn.dataset.panel = s.id;
+    btn.innerHTML = '<span class="nbtn-num"></span><span class="nbtn-label">'+s.label+'</span>';
+    container.appendChild(btn);
+  });
+  // hide group label if all hidden
+  var grp = document.getElementById('approachNavGroup');
+  if(grp) grp.style.display = approachState.some(function(s){return s.visible;}) ? '' : 'none';
+  var sep = grp && grp.previousElementSibling;
+}
+
+function applyOrder(){
+  // Rebuild nav accordion nested buttons
+  csAccBody.innerHTML = '';
+  curatorState.forEach(function(s){
+    if(!s.visible) return;
+    var c = getCaseById(s.id);
+    var pid = 'p-cs' + c.id;
+    var btn = document.createElement('button');
+    btn.className = 'nbtn nbtn-nested';
+    btn.dataset.panel = pid;
+    btn.innerHTML = '<span class="nbtn-num">'+String(curatorState.filter(function(x){return x.visible;}).indexOf(s)+1).padStart(2,'0')+'</span><span style="flex:1"><span class="nbtn-label">'+c.title+'</span><span class="nbtn-sub">'+c.co+'</span></span>';
+    csAccBody.appendChild(btn);
+  });
+
+  // Rebuild CS index grid
+  var csIndex = document.getElementById('p-cs-index');
+  var grid = csIndex.querySelector('.csi-grid');
+  grid.innerHTML = '';
+  curatorState.forEach(function(s){
+    if(!s.visible) return;
+    var c = getCaseById(s.id);
+    var card = document.createElement('div');
+    card.className = 'csi-card';
+    card.dataset.panel = 'p-cs' + c.id;
+    card.innerHTML = '<div class="csi-num">'+String(curatorState.filter(function(x){return x.visible;}).indexOf(s)+1).padStart(2,'0')+'</div><div class="csi-title">'+c.title+'</div><div class="csi-co">'+c.co+'</div><div class="csi-cat">'+c.cat+'</div><div class="csi-tags">'+c.methods.map(function(m){return '<span class="csi-tag">'+m+'</span>';}).join('')+'</div><span class="csi-arrow">→</span>';
+    grid.appendChild(card);
+  });
+
+  // Update sub count
+  var visCount = curatorState.filter(function(s){return s.visible;}).length;
+  csAccToggle.querySelector('.nbtn-sub').textContent = visCount + ' case stud' + (visCount===1?'y':'ies');
+  applyApproachNav();
+}
+
+var dragSrcIdx = null;
+var dragSrcIsApproach = false;
+var approachDragSrcIdx = null;
+
+function renderApproachRows(){
+  var body = document.getElementById('curatorApproach');
+  if(!body) return;
+  body.innerHTML = '';
+  approachState.forEach(function(s, idx){
+    var row = document.createElement('div');
+    row.className = 'curator-row' + (s.visible ? '' : ' hidden-case');
+    row.draggable = true;
+
+    var handle = document.createElement('div');
+    handle.className = 'curator-drag-handle';
+    handle.innerHTML = '<svg width="12" height="14" viewBox="0 0 12 14" fill="currentColor"><circle cx="3" cy="2" r="1.2"/><circle cx="9" cy="2" r="1.2"/><circle cx="3" cy="7" r="1.2"/><circle cx="9" cy="7" r="1.2"/><circle cx="3" cy="12" r="1.2"/><circle cx="9" cy="12" r="1.2"/></svg>';
+
+    var vis = document.createElement('button');
+    vis.className = 'curator-vis' + (s.visible ? ' on' : '');
+    vis.innerHTML = s.visible
+      ? '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>'
+      : '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>';
+    vis.addEventListener('click', function(){
+      approachState[idx].visible = !approachState[idx].visible;
+      renderApproachRows();
+      applyApproachNav();
+    });
+
+    var info = document.createElement('div');
+    info.className = 'curator-info';
+    info.innerHTML = '<div class="curator-case-title">'+s.label+'</div>';
+
+    row.addEventListener('dragstart', function(e){
+      approachDragSrcIdx = idx;
+      setTimeout(function(){ row.classList.add('dragging'); }, 0);
+      e.dataTransfer.effectAllowed = 'move';
+    });
+    row.addEventListener('dragend', function(){
+      row.classList.remove('dragging');
+      body.querySelectorAll('.curator-row').forEach(function(r){ r.classList.remove('drag-over'); });
+    });
+    row.addEventListener('dragover', function(e){
+      e.preventDefault();
+      body.querySelectorAll('.curator-row').forEach(function(r){ r.classList.remove('drag-over'); });
+      row.classList.add('drag-over');
+    });
+    row.addEventListener('drop', function(e){
+      e.preventDefault();
+      if(approachDragSrcIdx === null || approachDragSrcIdx === idx) return;
+      var moved = approachState.splice(approachDragSrcIdx, 1)[0];
+      approachState.splice(idx, 0, moved);
+      approachDragSrcIdx = null;
+      renderApproachRows();
+      applyApproachNav();
+    });
+
+    row.appendChild(handle);
+    row.appendChild(vis);
+    row.appendChild(info);
+    body.appendChild(row);
+  });
+}
+
+function renderCuratorRows(){
+  var body = document.getElementById('curatorCases');
+  body.innerHTML = '';
+  curatorState.forEach(function(s, idx){
+    var c = getCaseById(s.id);
+    var row = document.createElement('div');
+    row.className = 'curator-row' + (s.visible ? '' : ' hidden-case');
+    row.dataset.idx = idx;
+    row.draggable = true;
+
+    // Drag handle
+    var handle = document.createElement('div');
+    handle.className = 'curator-drag-handle';
+    handle.innerHTML = '<svg width="12" height="14" viewBox="0 0 12 14" fill="currentColor"><circle cx="3" cy="2" r="1.2"/><circle cx="9" cy="2" r="1.2"/><circle cx="3" cy="7" r="1.2"/><circle cx="9" cy="7" r="1.2"/><circle cx="3" cy="12" r="1.2"/><circle cx="9" cy="12" r="1.2"/></svg>';
+
+    // Eye toggle
+    var vis = document.createElement('button');
+    vis.className = 'curator-vis' + (s.visible ? ' on' : '');
+    vis.title = s.visible ? 'Hide' : 'Show';
+    vis.innerHTML = s.visible
+      ? '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>'
+      : '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>';
+    vis.addEventListener('click', function(){
+      curatorState[idx].visible = !curatorState[idx].visible;
+      renderCuratorRows();
+      applyOrder();
+    });
+
+    // Info
+    var info = document.createElement('div');
+    info.className = 'curator-info';
+    info.innerHTML = '<div class="curator-case-title">'+c.title+'</div><div class="curator-case-co">'+c.co+'</div>';
+
+    // Drag events
+    row.addEventListener('dragstart', function(e){
+      dragSrcIdx = idx;
+      setTimeout(function(){ row.classList.add('dragging'); }, 0);
+      e.dataTransfer.effectAllowed = 'move';
+    });
+    row.addEventListener('dragend', function(){
+      row.classList.remove('dragging');
+      document.querySelectorAll('.curator-row').forEach(function(r){ r.classList.remove('drag-over'); });
+    });
+    row.addEventListener('dragover', function(e){
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      document.querySelectorAll('.curator-row').forEach(function(r){ r.classList.remove('drag-over'); });
+      row.classList.add('drag-over');
+    });
+    row.addEventListener('drop', function(e){
+      e.preventDefault();
+      if(dragSrcIdx === null || dragSrcIdx === idx) return;
+      var moved = curatorState.splice(dragSrcIdx, 1)[0];
+      curatorState.splice(idx, 0, moved);
+      dragSrcIdx = null;
+      renderCuratorRows();
+      applyOrder();
+    });
+
+    row.appendChild(handle);
+    row.appendChild(vis);
+    row.appendChild(info);
+    body.appendChild(row);
+  });
+
+  // Update count
+  var visCS = curatorState.filter(function(s){return s.visible;}).length;
+  var visAP = approachState.filter(function(s){return s.visible;}).length;
+  document.getElementById('curatorCount').textContent = (visCS+visAP) + ' of ' + (curatorState.length+approachState.length) + ' slides visible';
+}
+
+function openCurator(){
+  renderApproachRows();
+  renderCuratorRows();
+  document.getElementById('curator-overlay').classList.add('open');
+}
+
+function closeCurator(){
+  document.getElementById('curator-overlay').classList.remove('open');
+}
+
+document.getElementById('curatorDoneBtn').addEventListener('click', closeCurator);
+
+document.addEventListener('keydown', function(e){
+  if(e.shiftKey && e.key === 'E'){
+    var overlay = document.getElementById('curator-overlay');
+    if(overlay.classList.contains('open')){ closeCurator(); }
+    else { openCurator(); }
+  }
+});
+
+
+// Init approach nav
+applyApproachNav();
+
+// ── PDF Export ────────────────────────────────────────────────────────────────
+document.getElementById('curatorExportBtn').addEventListener('click', function() {
+  // Collect ordered visible panel ids
+  var printOrder = [];
+  // Static panels always included
+  // Always-on panels
+  ['p-about','p-work','p-expertise'].forEach(function(id){ printOrder.push(id); });
+  // Approach panels in curator order/visibility
+  approachState.forEach(function(s){ if(s.visible) printOrder.push(s.id); });
+  var staticPanels = printOrder.slice(); // for TOC splice reference
+  // Add visible CS panels in curator order
+  curatorState.forEach(function(s){
+    if(s.visible) printOrder.push('p-cs' + s.id);
+  });
+  printOrder.splice(staticPanels.length, 0, 'p-cs-toc');
+  printOrder.push('p-close');
+
+  // Mark all panels: hide non-print ones
+  document.querySelectorAll('.panel').forEach(function(p){
+    if(printOrder.indexOf(p.id) === -1){
+      p.classList.add('print-hidden');
+    } else {
+      p.classList.remove('print-hidden');
+    }
+  });
+
+  // Build print TOC
+  var tocList = document.getElementById('tocList');
+  tocList.innerHTML = '';
+  curatorState.filter(function(s){return s.visible;}).forEach(function(s,i){
+    var c=getCaseById(s.id);
+    var row=document.createElement('div');
+    row.className='toc-item';
+    row.innerHTML='<div class="toc-num">'+String(i+1).padStart(2,'0')+'</div><div class="toc-name">'+c.title+'</div><div class="toc-cat">'+c.cat+'</div><div class="toc-co">'+c.co+'</div>';
+    tocList.appendChild(row);
+  });
+
+  // Expand all accordions
+  document.querySelectorAll('.abody').forEach(function(b){
+    b.style.maxHeight = 'none';
+    b.style.paddingBottom = '14px';
+  });
+
+  // Close curator
+  closeCurator();
+
+  // Print
+  setTimeout(function(){
+    window.print();
+    // Restore after print dialog closes
+    setTimeout(function(){
+      document.querySelectorAll('.panel').forEach(function(p){
+        p.classList.remove('print-hidden');
+      });
+      document.querySelectorAll('.abody').forEach(function(b){
+        b.style.maxHeight = '';
+        b.style.paddingBottom = '';
+      });
+    }, 1000);
+  }, 200);
+});
+
+</script>
+</body>
+</html>

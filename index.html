@@ -484,8 +484,20 @@ var APPROACH = [
   {id:'p-ai',     label:'AI in Research'},
   {id:'p-leadership', label:'Research Leadership'}
 ];
-var approachState = APPROACH.map(function(a){ return {id:a.id, label:a.label, visible:true}; });
-var curatorState = CASES.map(function(c){ return {id: c.id, visible: true}; });
+var approachState = [
+  {id:'p-values',     label:'Research Philosophy', visible:true},
+  {id:'p-ai',         label:'AI in Research',       visible:true},
+  {id:'p-leadership', label:'Research Leadership',  visible:false}
+];
+var curatorState = [
+  {id:6, visible:true},
+  {id:7, visible:true},
+  {id:4, visible:true},
+  {id:5, visible:true},
+  {id:2, visible:true},
+  {id:1, visible:false},
+  {id:3, visible:false}
+];
 
 function getCaseById(id){
   return CASES.find(function(c){ return c.id === id; });
@@ -698,8 +710,9 @@ document.addEventListener('keydown', function(e){
 });
 
 
-// Init approach nav
+// Init approach nav and apply default curator state on load
 applyApproachNav();
+applyOrder();
 
 // ── PDF Export ────────────────────────────────────────────────────────────────
 document.getElementById('curatorExportBtn').addEventListener('click', function() {

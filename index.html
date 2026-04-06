@@ -54,7 +54,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0e0e0e;display:flex
 #p-about{display:none;grid-template-columns:420px 1fr;background:var(--cream-light);}
 #p-about.on{display:grid !important;}
 .about-img{background:var(--warm-gray);overflow:hidden;}
-.about-img img{width:100%;height:100%;object-fit:cover;object-position:center center;transform:scale(0.75);transform-origin:center center;display:block;}
+.about-img img{width:100%;height:100%;object-fit:contain;object-position:center center;display:block;}
 .about-body{padding:44px 56px 28px;display:flex;flex-direction:column;justify-content:flex-start;}
 .ptitle{font-family:'Playfair Display',serif;font-size:2.3rem;font-weight:900;color:var(--forest);line-height:1.05;margin-bottom:1.4rem;}
 .ptitle em{font-style:italic;font-weight:400;color:var(--sage);}
@@ -97,7 +97,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0e0e0e;display:flex
 #p-ai{display:none;grid-template-columns:1fr 1fr;}
 #p-ai.on{display:grid !important;}
 .ai-l{background:var(--forest);padding:36px 50px 28px;display:flex;flex-direction:column;justify-content:flex-start;}
-.aip{font-family:'Crimson Pro',serif;font-size:1.15rem;color:rgba(255,255,255,0.52);line-height:1.75;font-weight:300;margin-top:3rem;}
+.aip{font-family:'Crimson Pro',serif;font-size:1.15rem;color:var(--cream);line-height:1.75;font-weight:300;margin-top:4.5rem;}
 .ai-r{background:var(--cream-light);padding:36px 50px 28px;display:flex;flex-direction:column;justify-content:center;gap:1.1rem;}
 .aih{font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:700;color:#fff;line-height:1.05;margin-top:8px;}
 .aih em{font-style:italic;font-weight:400;}
@@ -205,50 +205,73 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0e0e0e;display:flex
 
 /* PRINT / PDF EXPORT */
 @media print {
-  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-  html, body { width:100%; height:auto; overflow:visible; background:#fff; display:block; }
-  .shell { width:100%; height:auto; display:block; transform:none !important; }
-  .nav, #curator-overlay { display:none !important; }
-  .content { position:static; overflow:visible; width:100%; }
+  * { -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; box-sizing:border-box; }
+  @page { margin:0; size:letter landscape; }
+
+  html, body { width:100%; height:auto; overflow:visible; background:#0e0e0e; display:block; margin:0; padding:0; }
+  .shell { width:100% !important; height:auto !important; display:block !important; transform:none !important; grid-template-columns:none !important; }
+  .nav, #curator-overlay { display:none !important; width:0 !important; overflow:hidden !important; }
+  .content { position:static !important; overflow:visible; width:100% !important; display:block !important; }
+
   .panel {
-    display:block !important;
+    display:none !important;
     position:static !important;
     width:100%;
-    height:auto !important;
-    min-height:100vh;
+    height:100vh;
+    max-height:100vh;
+    overflow:hidden !important;
     page-break-after:always;
-    overflow:visible !important;
+    page-break-inside:avoid;
+    break-after:page;
+    box-sizing:border-box;
   }
   .panel.print-hidden { display:none !important; }
-  /* Expand all accordions */
-  .abody { max-height:none !important; padding-bottom:14px !important; }
-  .aitem.open .abody, .abody { max-height:none !important; }
-  /* Fix grid/flex heights */
-  #p-about { display:grid !important; min-height:100vh; }
-  #p-work { display:flex !important; min-height:100vh; }
-  #p-values { display:flex !important; min-height:100vh; }
-  #p-ai { display:grid !important; min-height:100vh; }
-  #p-leadership { display:flex !important; min-height:100vh; }
-  #p-expertise { display:flex !important; min-height:100vh; }
+  .panel:not(.print-hidden) { display:flex !important; }
+
+  #p-print-cover { display:flex !important; background:var(--forest) !important; flex-direction:column; align-items:center; justify-content:center; gap:1rem; page-break-after:always !important; break-after:page !important; }
+
+  #p-about { display:flex !important; flex-direction:column; justify-content:center; background:var(--cream-light) !important; padding:60px 80px; width:100% !important; }
+  .about-img { display:none !important; }
+  .about-body { padding:0 !important; max-width:680px; }
+
+  #p-work { display:flex !important; background:var(--forest) !important; padding:48px 64px; flex-direction:column; }
+  .wcols { display:grid; grid-template-columns:1fr 260px; flex:none; height:100%; }
+
+  #p-values { display:flex !important; background:var(--cream) !important; padding:48px 64px; }
+  .vgrid { page-break-inside:avoid; }
+
+  #p-ai { display:grid !important; background:var(--forest) !important; }
+
+  #p-leadership { display:flex !important; background:var(--cream) !important; padding:48px 64px; }
+  .abody { max-height:none !important; padding-bottom:10px !important; overflow:visible !important; }
+
+  #p-expertise { display:flex !important; background:var(--forest) !important; align-items:center; justify-content:center; }
+
   #p-cs-index { display:none !important; }
-  #p-close { display:flex !important; min-height:60vh; page-break-after:avoid; }
-  .csi-click-hint { display:none !important; }
-  #p-cs-toc { display:block !important; min-height:auto; page-break-after:always; background:var(--forest) !important; padding:48px 64px; }
+  #p-cs-toc { display:flex !important; flex-direction:column; background:var(--forest) !important; padding:48px 64px; height:100vh; max-height:100vh; page-break-after:always !important; break-after:page !important; }
   .toc-eyebrow-print { font-family:'DM Mono',monospace; font-size:0.52rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--sage); display:block; margin-bottom:10px; }
   .toc-title-print { font-family:'Playfair Display',serif; font-size:2rem; font-weight:900; color:var(--cream); line-height:1.05; margin-bottom:28px; }
   .toc-title-print em { font-style:italic; font-weight:400; color:var(--sage); }
-  .toc-list { border-top:1px solid rgba(255,255,255,0.08); }
-  .toc-item { display:grid; grid-template-columns:32px 1fr 180px 140px; gap:16px; align-items:baseline; padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.06); }
+  .toc-list { border-top:1px solid rgba(255,255,255,0.08); flex:1; }
+  .toc-item { display:grid; grid-template-columns:32px 1fr 200px 160px; gap:16px; align-items:baseline; padding:12px 0; border-bottom:1px solid rgba(255,255,255,0.06); }
   .toc-num { font-family:'DM Mono',monospace; font-size:0.5rem; letter-spacing:0.1em; color:var(--sage); }
-  .toc-name { font-family:'Playfair Display',serif; font-size:0.95rem; font-weight:600; color:var(--cream); line-height:1.3; }
-  .toc-cat { font-family:'Crimson Pro',serif; font-size:0.82rem; font-style:italic; color:rgba(255,255,255,0.4); }
-  .toc-co { font-family:'DM Mono',monospace; font-size:0.42rem; letter-spacing:0.07em; text-transform:uppercase; color:var(--taupe); text-align:right; }
-  .pcs { display:grid !important; min-height:100vh; }
-  .cs-main { overflow:visible !important; }
-  .cs-accord-body { overflow:visible !important; }
-  .cs-img-col { min-height:400px; }
-  .wcols { flex:none; }
-  .vgrid { break-inside:avoid; }
+  .toc-name { font-family:'Playfair Display',serif; font-size:1rem; font-weight:600; color:var(--cream); line-height:1.3; }
+  .toc-cat { font-family:'Crimson Pro',serif; font-size:0.88rem; font-style:italic; color:rgba(255,255,255,0.45); }
+  .toc-co { font-family:'DM Mono',monospace; font-size:0.44rem; letter-spacing:0.07em; text-transform:uppercase; color:var(--taupe); text-align:right; }
+  .csi-click-hint { display:none !important; }
+
+  .pcs { display:grid !important; grid-template-rows:auto 1fr; background:var(--cream-light); height:100vh; max-height:100vh; overflow:hidden !important; }
+  .cs-main { display:grid !important; grid-template-columns:1fr 360px !important; overflow:hidden !important; height:100%; width:100%; }
+  .cs-accord-body { overflow:hidden !important; padding:20px 36px 16px; width:100%; }
+  .cs-accord-body p, .cs-accord-body .atext { font-size:0.9rem !important; line-height:1.6 !important; }
+  .cs-img-col { overflow:hidden !important; height:100%; width:360px; flex-shrink:0; }
+  .cs-img-col > div { width:100% !important; height:100% !important; }
+  .cs-img-col img { max-height:100% !important; }
+
+  #p-close { display:flex !important; background:var(--forest) !important; align-items:center; justify-content:center; flex-direction:column; page-break-after:avoid; }
+
+  a { color:inherit !important; text-decoration:none !important; }
+  .close-link { border-color:rgba(255,255,255,0.3) !important; }
 }
 
 </style>
@@ -273,19 +296,26 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0e0e0e;display:flex
       <span class="nav-group">Selected Work</span>
     </div>
     <div class="nav-foot">
-      <a href="mailto:jerilyn.boykin@gmail.com">jerilyn.boykin@gmail.com</a>
+      <a href="/cdn-cgi/l/email-protection#600a0512090c190e4e020f190b090e20070d01090c4e030f0d"><span class="__cf_email__" data-cfemail="375d52455e5b4e591955584e5c5e5977505a565e5b1954585a">[email&#160;protected]</span></a>
       <a href="https://www.linkedin.com/in/jjboykin/" target="_blank">LinkedIn</a>
       <div class="nav-credit">content by me &middot; design by claude</div>
     </div>
   </nav>
   <div class="content">
+    <div class="panel" id="p-print-cover" style="display:none;">
+      <div style="font-family:'DM Mono',monospace;font-size:0.52rem;letter-spacing:0.24em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:12px;">Research Portfolio &middot; 2026</div>
+      <div style="font-family:'Playfair Display',serif;font-size:4rem;font-weight:900;color:#fff;line-height:1.0;text-align:center;">Jerilyn Boykin</div>
+      <div style="font-family:'Crimson Pro',serif;font-size:1.3rem;font-style:italic;color:var(--sage);margin-top:10px;">Mixed Methods Researcher &middot; Product &amp; Brand</div>
+      <div style="width:40px;height:1px;background:var(--sage);margin:28px auto;opacity:0.5;"></div>
+      <div style="font-family:'DM Mono',monospace;font-size:0.48rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.2);"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6d07081f04011403430f02140604032d0a000c0401430e0200">[email&#160;protected]</a></div>
+    </div>
     <div class="panel on" id="p-about">
       <div class="about-img"><img src="aboutme.jpg" alt="Jerilyn Boykin"></div>
       <div class="about-body">
         <div class="ptitle">About <em>Me</em></div>
         <div class="about-text">
-          <p>Born and raised in Los Angeles, I’ve always been naturally curious about people: what drives them, what they choose, and why. That instinct to observe and understand is what led me to a career in research.</p>
-          <p>Currently I’m based in Brooklyn, a city that inspires me every day. The people here are endlessly interesting to observe — everyone moving with purpose, style, and their own story. After hours and on the weekends I stay busy exploring fashion trends, baking, and listening to podcasts.</p>
+          <p>Born and raised in Los Angeles, I've always been naturally curious about people: what drives them, what they choose, and why. That instinct to observe and understand is what led me to a career in research.</p>
+          <p>Currently I'm based in Brooklyn, a city that inspires me every day. The people here are endlessly interesting to observe — everyone moving with purpose, style, and their own story. After hours and on the weekends I stay busy exploring fashion trends, baking, and listening to podcasts.</p>
         </div>
       </div>
     </div>
@@ -335,7 +365,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0e0e0e;display:flex
       <div class="vgrid">
         <div class="vcard"><div class="vnum">01</div><div class="vtitle">Stakeholder Alignment</div><p class="vdesc">Understand the decisions research needs to inform. Refine questions to ensure insights drive action, not just reports.</p></div>
         <div class="vcard"><div class="vnum">02</div><div class="vtitle">Method&ndash;Question Fit</div><p class="vdesc">Select methods based on the decision and level of certainty required, not habit or preference.</p></div>
-        <div class="vcard"><div class="vnum">03</div><div class="vtitle">Minimum Viable Research</div><p class="vdesc">Move quickly with the lightest study that can confidently answer the question. Speed and rigor aren’t opposites.</p></div>
+        <div class="vcard"><div class="vnum">03</div><div class="vtitle">Minimum Viable Research</div><p class="vdesc">Move quickly with the lightest study that can confidently answer the question. Speed and rigor aren't opposites.</p></div>
         <div class="vcard"><div class="vnum">04</div><div class="vtitle">Prioritizing Rigor</div><p class="vdesc">Maintain strong fundamentals: clear hypotheses, sound sampling, and disciplined analysis, even under tight timelines.</p></div>
       </div>
     </div>
@@ -343,14 +373,15 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0e0e0e;display:flex
       <div class="ai-l">
         <span class="eyebrow">Applied Skills</span>
         <div class="aih">AI in <em>Research</em></div>
-        <div class="aip">My take on AI: the buzz is scary, but it’s inevitable. I embrace it more every day (and sometimes really love it).<br><br>While I enjoy combing through data and refining survey questions, <span>my real value lies in intuition, judgment, and a deep understanding of the people I’m building for.</span><br><br>I want AI to make me better, to give me time back and make my work more accessible. That’s how I’m using it today.</div>
+        <div class="aip">My take on AI: the buzz is loud, but the opportunity is real. I embrace it more every day (and most days, I really love it).<br><br>While I enjoy combing through data and refining survey questions, <span style="color:var(--sage);">I've learned</span> <span style="color:var(--sage);">my real value lies in intuition, judgment, and a deep understanding of the people I'm building for.</span><br><br>I see AI not just as a tool to give me time back, but as a way to level the playing field — making my work more accessible to others, and opening up access to new skills for me. That's how I'm using it today.</div>
       </div>
       <div class="ai-r">
         <p class="ai-intro" style="font-size:1.5rem;">How I use AI:</p>
-        <div class="aicard"><div class="aicard-lbl">Brief &amp; Survey Development</div><div class="aicard-txt">First-draft discussion guides, surveys, and briefs.</div></div>
-        <div class="aicard"><div class="aicard-lbl">Synthesis &amp; Analysis</div><div class="aicard-txt">AI-assisted lit reviews, competitive research, and cross-tabulations.</div></div>
+        <div class="aicard"><div class="aicard-lbl">Building Interactive Prototypes</div><div class="aicard-txt">Build interactive prototypes with Cursor AI, bringing research recommendations to life and creating rough product mocks for use as research stimuli.</div></div>
         <div class="aicard"><div class="aicard-lbl">Building Custom Agents</div><div class="aicard-txt">Turned a biannual commerce tracker into an always-on resource: a custom agent that lets stakeholders query for specific data points on demand.</div></div>
-        <div class="aitools"><span class="aitool">Automated Analysis</span><span class="aitool">Custom Agents</span><span class="aitool">Goose</span><span class="aitool">Claude</span><span class="aitool">ChatGPT</span><span class="aitool">Gemini</span></div>
+        <div class="aicard"><div class="aicard-lbl">Synthesis &amp; Analysis</div><div class="aicard-txt">AI-assisted lit reviews, text data mining, competitive research, and cross-tabulations.</div></div>
+        <div class="aicard"><div class="aicard-lbl">Brief &amp; Survey Development</div><div class="aicard-txt">First-draft discussion guides, surveys, and briefs.</div></div>
+        <div class="aitools"><span class="aitool">Automated Analysis</span><span class="aitool">Custom Agents</span><span class="aitool">Cursor</span><span class="aitool">Goose</span><span class="aitool">Claude</span><span class="aitool">ChatGPT</span><span class="aitool">Gemini</span></div>
       </div>
     </div>
     <div class="panel" id="p-leadership">
@@ -366,17 +397,17 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0e0e0e;display:flex
     </div>
     <div class="panel" id="p-expertise">
       <div style="display:flex;flex-direction:column;align-items:center;gap:2rem;">
-        <div style="font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--sage);">Marketing &nbsp;|&nbsp; Product</div>
-        <div class="exp-quote">My expertise sits at the intersection of marketing and product: understanding not just how people use and experience products, but what drives the decisions they make, what they believe about brands, and how all of it connects to business outcomes.</div>
+        <div style="font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--sage);">Product &nbsp;|&nbsp; Brand</div>
+        <div class="exp-quote">My expertise sits at the intersection of product and brand: <em>understanding not just how people use and experience products, but what drives the decisions they make,</em> what they believe about brands, and how all of it connects to business outcomes.</div>
       </div>
     </div>
     <div class="panel" id="p-close">
       <div class="close-thanks">Thanks for <em>reading.</em></div>
       <div class="close-sub">Want to dig deeper?</div>
       <div class="close-links">
-        <a class="close-link" href="mailto:jerilyn.boykin@gmail.com">
+        <a class="close-link" href="/cdn-cgi/l/email-protection#a4cec1d6cdc8ddca8ac6cbddcfcdcae4c3c9c5cdc88ac7cbc9">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
-          jerilyn.boykin@gmail.com
+          <span class="__cf_email__" data-cfemail="92f8f7e0fbfeebfcbcf0fdebf9fbfcd2f5fff3fbfebcf1fdff">[email&#160;protected]</span>
         </a>
         <div class="close-divider"></div>
         <a class="close-link" href="https://www.linkedin.com/in/jjboykin/" target="_blank">
@@ -412,15 +443,16 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0e0e0e;display:flex
 </div>
 </div>
 </div>
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 var CASES=[
   {id:1,title:"Cash App \u201cCash In\u201d Campaign",titleHtml:'Cash App <em>\u201cCash In\u201d</em> Campaign',cat:"Brand & Product Campaign Influence",co:"Block \xb7 2025",methods:["Message Testing","A/B Creative Testing","Measurement"],img:"cashin_hero.png",img2:"cashin1.png",img3:"cashin2.png",imgPos:"center center",heroLayout:true,approach:"Cash App was primarily known as a peer-to-peer payments platform, but growth increasingly depended on driving adoption of its banking products. To meet this challenge, <strong>the company launched its largest-ever campaign \u2014 a $15M hybrid brand and product effort designed to bridge cultural resonance with banking credibility.</strong>",role:"As the brand research lead, I advised cross-functional marketing partners through the full campaign lifecycle \u2014 informing messaging, creative direction, and measurement.",impact:"Research identified which banking products to prioritize based on credibility correlation and awareness gaps. Qualitative findings directly shaped the campaign\u2019s tone and messaging. Creative testing surfaced product visibility issues that informed new video cuts. The campaign delivered <strong>8\u201314% lifts</strong> in awareness and consideration of featured banking products.",metric:"8\u201314%",metricLabel:"lifts in key metrics"},
-  {id:2,title:"Launching BET+ Streaming Service",titleHtml:"Launching <em>BET+</em> Streaming Service",cat:"0-to-1 Product Research",co:"Viacom \xb7 2019",methods:["TURF Analysis","Focus Groups","Usability"],img:"betplus_hero.png",imgPos:"center center",approach:"BET, the largest American media brand dedicated to Black culture and entertainment, set out in 2018 to enter the streaming market with BET+, a new SVOD service targeting Black and Latinx audiences. <strong>This new product was to be built, in roughly 6 months, by a team with deep linear TV expertise but no prior direct-to-consumer streaming experience.</strong> The goal: surpass 1M subscribers in year one.",role:"I designed and pitched a phased mixed-methods research plan to senior leadership, managed two junior researchers, directed a TURF analysis to optimize the content library, and oversaw focus groups and usability testing of the MVP.",impact:"BET+ surpassed its year-one subscriber goal <strong>two months early</strong>. Titles surfaced through TURF analysis became the most-viewed content post-launch. Research shaped in-product content categorization and informed which titles to lead with in acquisition channels to support a higher price point.",metric:"1M",metricLabel:"subscribers \u2014 2 months early"},
+  {id:2,title:"Launching BET+ Streaming Service",titleHtml:"Launching <em>BET+</em> Streaming Service",cat:"0-to-1 Product Research",co:"Viacom \xb7 2019",methods:["TURF Analysis","Focus Groups","Usability"],img:"betplus_hero.png",imgPos:"center center",imgMaxWidth:"74%",approach:"BET, the largest American media brand dedicated to Black culture and entertainment, set out in 2018 to enter the streaming market with BET+, a new SVOD service targeting Black and Latinx audiences. <strong>This new product was to be built, in roughly 6 months, by a team with deep linear TV expertise but no prior direct-to-consumer streaming experience.</strong> The goal: surpass 1M subscribers in year one.",role:"I designed and pitched a phased mixed-methods research plan to senior leadership, managed two junior researchers, directed a TURF analysis to optimize the content library, and oversaw focus groups and usability testing of the MVP.",impact:"BET+ surpassed its year-one subscriber goal <strong>two months early</strong>. Titles surfaced through TURF analysis became the most-viewed content post-launch. Research shaped in-product content categorization and informed which titles to lead with in acquisition channels to support a higher price point.",metric:"1M",metricLabel:"subscribers \u2014 2 months early"},
   {id:3,title:"Afterpay Brand Diagnosis & Growth Strategy",titleHtml:"Afterpay Brand <em>Diagnosis</em> & Growth Strategy",cat:"Cross-functional Research Leadership",co:"Block \xb7 2025",methods:["Synthesis & Analysis","Stakeholder Influence","XFN Leadership"],img:"ap_diagnosis1.png",img2:"ap_diagnosis2.png",img3:"ap_diagnosis3.png",img4:"ap_diagnosis4.png",imgPos:"center center",stackLayout:true,approach:"Block acquired Afterpay in 2022 with the vision of integrating its buy now, pay later services into Cash App. Despite the 2025 effort to converge the 2 brands, cross-brand adoption remained limited and Afterpay\u2019s growth had slowed. <strong>The CMO (and Afterpay founder) needed a clearer picture of where the brand stood, why performance had softened, and where the greatest opportunities lay for reigniting growth.</strong>",role:"Rather than commission new research, I coordinated a cross-functional tiger team across Market Insights, UX, Data Science, and VOC to synthesize existing data and third-party intelligence into a comprehensive state-of-the-brand assessment.",impact:"We presented a strategic narrative - covering brand health, market position, and performance drivers directly to the CMO, who aligned on the strategy and direction for H2. I also secured sign-off on an H2 research roadmap including new foundational research: brand identity, equity tracking, behavioral segmentation, and journey mapping - all centered on an audience-based strategy.",metric:"4",metricLabel:"new foundational studies added to roadmap"},
   {id:4,title:"Afterpay Pricing Opportunities",titleHtml:"Afterpay <em>Pricing</em> Opportunities",cat:"Product Development",co:"Block \xb7 2026",methods:["Conjoint","AI-Assisted Qual","Stakeholder Influence"],img:"ap_pricing1.png",img2:"ap_pricing2.png",img3:"afterpay_card.png",imgPos:"center top",pricingLayout:true,approach:"Afterpay pioneered BNPL in the US, but as the category matured, competitors pulled ahead with products that expanded how and where buy-now-pay-later is used. To catch up, <strong>Afterpay set out to launch a new card product, needing research to inform pricing and product construct before design sprints and engineering work began.</strong>",role:"I persuaded design leads to hold development pending findings, ran rapid AI-assisted qualitative research to establish an early POV on card format, and managed an external vendor through a full conjoint study.",impact:"Delivered card format direction in <strong>two days</strong>, leading to physical card being prioritized over virtual. The conjoint identified optimal MVP attributes - subscription price, order minimums, and benefits - and informed in-product placement of the new card relative to existing Afterpay payment options.",metric:"2 day",metricLabel:"turnaround for product direction"},
   {id:5,title:"Afterpay Mobile App Integration",titleHtml:"Afterpay <em>Mobile App</em> Integration",cat:"Product Strategy Research",co:"Block \xb7 2025",methods:["Quant Survey","AI Analysis","Stakeholder Influence"],img:"afterpay_mobile.png",img2:"cash_mobile.png",imgPos:"center top",sideBySide:true,approach:"Block was evaluating whether to bring Afterpay\u2019s shopping and discovery features into the Cash App ecosystem \u2014 a significant product and engineering investment, and a potentially disruptive shift for Afterpay\u2019s existing user base. <strong>Teams assumed Afterpay users would not be open to moving their activity to Cash App. The brief was to validate. I had other ideas.</strong>",role:"Rather than validate that assumption, I reframed it as a testable hypothesis and designed a quantitative survey to understand what was actually driving behavior in Afterpay mobile, and what needed to be true in the Cash App experience to drive migration.",impact:"Research revealed that shopping wasn\u2019t a core job in Afterpay mobile \u2014 but it was deeply woven into the user\u2019s mental model. So deeply that Cash App would need to match the experience entirely \u2014 or risk losing users in the transition. Product <strong>postponed the integration indefinitely</strong>, avoiding a costly and premature engineering investment.",metric:"$0",metricLabel:"engineering investment \u2014 integration paused"},
   {id:6,title:"Understanding Needs of Black Creators",titleHtml:"Understanding Needs of <em>Black Creators</em>",cat:"Generative Research",co:"Instagram \xb7 2020",methods:["Qualitative IDIs","Vendor Mgmt"],img:"creators1.jpg",img2:"creators2.png",imgPos:"center top",approach:"Black creators have been foundational to Instagram\u2019s culture since its earliest days, shaping trends, often without proportional credit or compensation. As the influencer economy matured and the 2020 racial justice reckoning intensified pressure on platforms to act, <strong>Instagram needed to move beyond assumptions and develop a genuine, evidence-based understanding of Black creators\u2019 experiences.</strong>",role:"Executed qualitative IDIs with Black creators, sourcing a vendor with specialty in overlooked and hard-to-reach populations, managing a rigorous recruitment process with Data Science, and navigating a sensitive review with Policy and Comms to ensure research stayed compliant without softening the findings.",impact:"Research surfaced disparities in pay, visibility, and brand access, and revealed the competitive threat from YouTube, TikTok, OnlyFans, and Patreon to Black creator loyalty. Findings directly informed creator funds, Reels incentive bonuses, Black creator collective partnerships, <strong>#BlackOwned highlights</strong>, and internal conversations about algorithmic bias.",metric:"13M",metricLabel:"combined followers across 30+ Black creators interviewed"},
-  {id:7,title:"Cash App Website Redesign",titleHtml:"Cash App <em>Website Redesign</em>",cat:"Design Evaluation",co:"Block \xb7 2025",methods:["Prototype Testing","Survey Research","Cross-Org Alignment"],img:"reskin1.png",img2:"reskin2.png",img3:"reskin3.png",imgPos:"center top",zigzagLayout:true,approach:"Cash App\u2019s creative team was driving toward a maturation of the brand aesthetic, a deliberate effort to position Cash App as more credible. But early into the reskin test, site metrics showed the new design underperforming. <strong>Growth Marketing pushed to revert; Creative pushed for iterative refinement.</strong> <strong>With no time for an A/B site intercept survey, the teams were at an impasse, and needed an insights-based resolution fast.</strong>",role:"I reframed the conflict as a researchable question, rallied Growth and Creative stakeholders around a research-led path, and designed a rapid A/B prototype test to isolate which design elements were driving the underperformance.",impact:"Research pinpointed the specific design issues: key art and product imagery and excessive negative space that triggered scam associations \u2014 both undermining credibility and contributing to early site abandonment. The findings resolved the deadlock, and established a new measurement framework used to evaluate subsequent site design iterations.",metric:"16%",metricLabel:"lift in mobile site attributed app downloads"}
+  {id:7,title:"Cash App Reskin",titleHtml:"Cash App <em>Reskin</em>",cat:"Design Evaluation",co:"Block \xb7 2025",methods:["Prototype Testing","Survey Research","Cross-Org Alignment"],img:"reskin1.png",img2:"reskin2.png",img3:"reskin3.png",imgPos:"center top",zigzagLayout:true,approach:"Cash App\u2019s creative team was driving toward a maturation of the brand aesthetic, a deliberate effort to position Cash App as more credible. But early into the reskin test, site metrics showed the new design underperforming. <strong>Growth Marketing pushed to revert; Creative pushed for iterative refinement.</strong> <strong>With no time for an A/B site intercept survey, the teams were at an impasse, and needed an insights-based resolution fast.</strong>",role:"I reframed the conflict as a researchable question, rallied Growth and Creative stakeholders around a research-led path, and designed a rapid A/B prototype test to isolate which design elements were driving the underperformance.",impact:"Research pinpointed the specific design issues: key art and product imagery and excessive negative space that triggered scam associations \u2014 both undermining credibility and contributing to early site abandonment. The findings resolved the deadlock, and established a new measurement framework used to evaluate subsequent site design iterations.",metric:"16%",metricLabel:"lift in mobile site attributed app downloads"},
+  {id:8,title:"Cash App Mobile Redesign",titleHtml:"Cash App <em>Mobile Redesign</em>",cat:"UX & Design Research",co:"Block \xb7 2025",methods:["Concept Testing","Qualitative IDIs","Design Evaluation"],img:"redesign1.png",img2:"redesign2.png",img3:"redesign3.png",img4:"redesign4.png",imgPos:"center top",zigzagLayout:true,approach:"Design set out to implement an intentionally unconventional layout approach for Cash App\u2019s mobile website redesign: a bold, green-forward aesthetic with a floating navigation, grid-based layout, and a visual language closer to a mobile app than a traditional banking site. Before development could move forward, we needed to pressure-test the direction to understand how the design impacted navigation and feature discoverability.",role:"A project sitting at the intersection of design and brand required a researcher who could credibly operate across both. I led qualitative concept testing across three design variations, conducting 90-minute 1:1 remote usability sessions with 14 current, lapsed, and prospective customers.",impact:"Research directly informed design and navigation decisions at a critical decision point, identifying the design variant that best facilitated below-the-fold feature discovery. <strong>Findings also exposed critical navigation failures related to the floating nav, the site\u2019s visual resemblance to the mobile app, and the persistent green background</strong> \u2014 all prompting a full rethink of the site\u2019s navigation architecture and design.",metric:"4",metricLabel:"critical navigation failures exposed"}
 ];
 var navScroll=document.getElementById('navScroll');
 var csPanels=document.getElementById('csPanels');
@@ -449,11 +481,12 @@ CASES.forEach(function(c){
   var ih;
   if(c.stackLayout){ih='<div style="width:100%;height:100%;position:relative;background:var(--warm-gray);overflow:hidden;"><img src="'+c.img4+'" style="position:absolute;top:13%;left:2%;width:62%;object-fit:cover;object-position:center top;box-shadow:0 4px 16px rgba(0,0,0,0.2);z-index:1;"><img src="'+c.img3+'" style="position:absolute;top:26%;left:26%;width:62%;object-fit:cover;object-position:center top;box-shadow:0 4px 18px rgba(0,0,0,0.24);z-index:2;"><img src="'+c.img2+'" style="position:absolute;top:39%;left:4%;width:62%;object-fit:cover;object-position:center top;box-shadow:0 4px 20px rgba(0,0,0,0.26);z-index:3;"><img src="'+c.img+'" style="position:absolute;top:52%;left:28%;width:62%;object-fit:cover;object-position:center top;box-shadow:0 4px 22px rgba(0,0,0,0.3);z-index:4;"></div>';}
   else if(c.heroLayout){ih='<div style="width:100%;height:100%;position:relative;background:var(--warm-gray);overflow:hidden;"><img src="'+c.img+'" style="position:absolute;top:20px;left:50%;transform:translateX(-50%);width:92%;object-fit:contain;box-shadow:0 4px 16px rgba(0,0,0,0.18);z-index:1;"><img src="'+c.img2+'" style="position:absolute;bottom:80px;left:12%;width:43%;object-fit:cover;object-position:center top;box-shadow:0 6px 20px rgba(0,0,0,0.2);z-index:2;max-height:65%;"><img src="'+c.img3+'" style="position:absolute;bottom:60px;left:44%;width:43%;object-fit:cover;object-position:center top;box-shadow:0 6px 20px rgba(0,0,0,0.25);z-index:3;max-height:65%;"></div>';}
+  else if(c.zigzagLayout&&c.img4){ih='<div style="width:100%;height:100%;position:relative;background:var(--warm-gray);overflow:hidden;"><img src="'+c.img+'" style="position:absolute;top:20%;left:2%;width:60%;object-fit:cover;object-position:center top;box-shadow:0 4px 16px rgba(0,0,0,0.22);z-index:1;"><img src="'+c.img2+'" style="position:absolute;top:34%;left:28%;width:60%;object-fit:cover;object-position:center top;box-shadow:0 4px 18px rgba(0,0,0,0.26);z-index:2;"><img src="'+c.img3+'" style="position:absolute;top:46%;left:4%;width:60%;object-fit:cover;object-position:center top;box-shadow:0 4px 20px rgba(0,0,0,0.3);z-index:3;"><img src="'+c.img4+'" style="position:absolute;top:62%;left:30%;width:60%;object-fit:cover;object-position:center top;box-shadow:0 4px 22px rgba(0,0,0,0.34);z-index:4;"></div>';}
   else if(c.zigzagLayout){ih='<div style="width:100%;height:100%;position:relative;background:var(--warm-gray);overflow:hidden;"><img src="'+c.img+'" style="position:absolute;top:16%;left:2%;width:68%;object-fit:cover;object-position:center top;box-shadow:0 4px 16px rgba(0,0,0,0.22);z-index:1;"><img src="'+c.img2+'" style="position:absolute;top:32%;left:24%;width:68%;object-fit:cover;object-position:center top;box-shadow:0 4px 18px rgba(0,0,0,0.26);z-index:2;"><img src="'+c.img3+'" style="position:absolute;top:48%;left:6%;width:68%;object-fit:cover;object-position:center top;box-shadow:0 4px 20px rgba(0,0,0,0.3);z-index:3;"></div>';}
   else if(c.img2&&c.sideBySide){var h=c.largeImages?'72':'58';ih='<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;gap:12px;padding:24px;background:var(--warm-gray);"><img src="'+c.img+'" style="height:'+h+'%;width:auto;object-fit:contain;box-shadow:0 4px 20px rgba(0,0,0,0.15);"><img src="'+c.img2+'" style="height:'+h+'%;width:auto;object-fit:contain;box-shadow:0 4px 20px rgba(0,0,0,0.15);"></div>';}
   else if(c.pricingLayout){ih='<div style="width:100%;height:100%;position:relative;background:var(--warm-gray);overflow:hidden;"><img src="'+c.img+'" style="position:absolute;top:20%;left:2%;width:64%;object-fit:cover;object-position:center top;box-shadow:0 6px 24px rgba(0,0,0,0.2);z-index:1;"><img src="'+c.img2+'" style="position:absolute;top:calc(20% + 22px);left:34%;width:64%;object-fit:cover;object-position:center top;box-shadow:0 6px 24px rgba(0,0,0,0.25);z-index:2;"><img src="'+c.img3+'" style="position:absolute;bottom:8%;left:50%;transform:translateX(-50%);height:44%;width:auto;object-fit:contain;box-shadow:0 6px 24px rgba(0,0,0,0.25);z-index:3;"></div>';}
   else if(c.img2){ih='<div style="width:100%;height:100%;position:relative;background:var(--warm-gray);overflow:hidden;"><img src="'+c.img+'" style="position:absolute;top:50%;transform:translateY(-55%);left:4%;width:46%;object-fit:cover;object-position:center top;box-shadow:0 6px 24px rgba(0,0,0,0.2);z-index:1;"><img src="'+c.img2+'" style="position:absolute;top:50%;transform:translateY(-35%);left:36%;width:46%;object-fit:cover;object-position:center top;box-shadow:0 6px 24px rgba(0,0,0,0.25);z-index:2;"></div>';}
-  else if(c.img){ih='<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:28px;background:var(--warm-gray);"><img src="'+c.img+'" style="max-width:100%;max-height:100%;object-fit:contain;object-position:'+(c.imgPos||'center center')+';display:block;box-shadow:0 4px 20px rgba(0,0,0,0.15);"></div>';}
+  else if(c.img){ih='<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:28px;background:var(--warm-gray);"><img src="'+c.img+'" style="max-width:'+(c.imgMaxWidth||'100%')+';max-height:100%;object-fit:contain;object-position:'+(c.imgPos||'center center')+';display:block;box-shadow:0 4px 20px rgba(0,0,0,0.15);"></div>';}
   else{ih='<div class="csnoimg"><div class="csnoimg-icon">+</div><span class="csnoimg-lbl">Add image</span></div>';}
   var panel=document.createElement('div');panel.className='panel pcs';panel.id=pid;
   panel.innerHTML='<div class="cshead"><div><div class="cstitle">'+c.titleHtml+'</div><div class="cscat">'+c.cat+' \xb7 '+c.co+'</div></div><div class="csmethods">'+c.methods.map(function(m){return '<span class="csm">'+m+'</span>';}).join('')+'</div></div><div class="cs-main"><div class="cs-accord-body"><p class="atext" style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--warm-gray);">'+c.approach+'</p><div class="aitem"><button class="abtn" data-accord><span class="alabel">My Role</span><span class="aicon">+</span></button><div class="abody"><p class="atext">'+c.role+'</p></div></div><div class="aitem"><button class="abtn" data-accord><span class="alabel">Impact</span><span class="aicon">+</span></button><div class="abody"><p class="atext">'+c.impact+'</p><div class="cs-metric"><span class="cs-metric-num">'+c.metric+'</span><span class="cs-metric-lbl">'+c.metricLabel+'</span></div></div></div></div><div class="cs-img-col">'+ih+'</div></div>';
@@ -478,7 +511,6 @@ function scaleToFit(){var s=document.querySelector('.shell');var sc=Math.min(win
 scaleToFit();
 window.addEventListener('resize',scaleToFit);
 
-// ── Curator ───────────────────────────────────────────────────────────────────
 var APPROACH = [
   {id:'p-values', label:'Research Philosophy'},
   {id:'p-ai',     label:'AI in Research'},
@@ -490,11 +522,12 @@ var approachState = [
   {id:'p-leadership', label:'Research Leadership',  visible:false}
 ];
 var curatorState = [
-  {id:6, visible:true},
+  {id:8, visible:true},
   {id:7, visible:true},
   {id:4, visible:true},
   {id:5, visible:true},
-  {id:2, visible:true},
+  {id:6, visible:true},
+  {id:2, visible:false},
   {id:1, visible:false},
   {id:3, visible:false}
 ];
@@ -515,14 +548,11 @@ function applyApproachNav(){
     btn.innerHTML = '<span class="nbtn-num"></span><span class="nbtn-label">'+s.label+'</span>';
     container.appendChild(btn);
   });
-  // hide group label if all hidden
   var grp = document.getElementById('approachNavGroup');
   if(grp) grp.style.display = approachState.some(function(s){return s.visible;}) ? '' : 'none';
-  var sep = grp && grp.previousElementSibling;
 }
 
 function applyOrder(){
-  // Rebuild nav accordion nested buttons
   csAccBody.innerHTML = '';
   curatorState.forEach(function(s){
     if(!s.visible) return;
@@ -535,7 +565,6 @@ function applyOrder(){
     csAccBody.appendChild(btn);
   });
 
-  // Rebuild CS index grid
   var csIndex = document.getElementById('p-cs-index');
   var grid = csIndex.querySelector('.csi-grid');
   grid.innerHTML = '';
@@ -549,14 +578,12 @@ function applyOrder(){
     grid.appendChild(card);
   });
 
-  // Update sub count
   var visCount = curatorState.filter(function(s){return s.visible;}).length;
   csAccToggle.querySelector('.nbtn-sub').textContent = visCount + ' case stud' + (visCount===1?'y':'ies');
   applyApproachNav();
 }
 
 var dragSrcIdx = null;
-var dragSrcIsApproach = false;
 var approachDragSrcIdx = null;
 
 function renderApproachRows(){
@@ -628,12 +655,10 @@ function renderCuratorRows(){
     row.dataset.idx = idx;
     row.draggable = true;
 
-    // Drag handle
     var handle = document.createElement('div');
     handle.className = 'curator-drag-handle';
     handle.innerHTML = '<svg width="12" height="14" viewBox="0 0 12 14" fill="currentColor"><circle cx="3" cy="2" r="1.2"/><circle cx="9" cy="2" r="1.2"/><circle cx="3" cy="7" r="1.2"/><circle cx="9" cy="7" r="1.2"/><circle cx="3" cy="12" r="1.2"/><circle cx="9" cy="12" r="1.2"/></svg>';
 
-    // Eye toggle
     var vis = document.createElement('button');
     vis.className = 'curator-vis' + (s.visible ? ' on' : '');
     vis.title = s.visible ? 'Hide' : 'Show';
@@ -646,12 +671,10 @@ function renderCuratorRows(){
       applyOrder();
     });
 
-    // Info
     var info = document.createElement('div');
     info.className = 'curator-info';
     info.innerHTML = '<div class="curator-case-title">'+c.title+'</div><div class="curator-case-co">'+c.co+'</div>';
 
-    // Drag events
     row.addEventListener('dragstart', function(e){
       dragSrcIdx = idx;
       setTimeout(function(){ row.classList.add('dragging'); }, 0);
@@ -683,7 +706,6 @@ function renderCuratorRows(){
     body.appendChild(row);
   });
 
-  // Update count
   var visCS = curatorState.filter(function(s){return s.visible;}).length;
   var visAP = approachState.filter(function(s){return s.visible;}).length;
   document.getElementById('curatorCount').textContent = (visCS+visAP) + ' of ' + (curatorState.length+approachState.length) + ' slides visible';
@@ -709,29 +731,21 @@ document.addEventListener('keydown', function(e){
   }
 });
 
-
-// Init approach nav and apply default curator state on load
 applyApproachNav();
 applyOrder();
 
-// ── PDF Export ────────────────────────────────────────────────────────────────
 document.getElementById('curatorExportBtn').addEventListener('click', function() {
-  // Collect ordered visible panel ids
   var printOrder = [];
-  // Static panels always included
-  // Always-on panels
+  printOrder.push('p-print-cover');
   ['p-about','p-work','p-expertise'].forEach(function(id){ printOrder.push(id); });
-  // Approach panels in curator order/visibility
   approachState.forEach(function(s){ if(s.visible) printOrder.push(s.id); });
-  var staticPanels = printOrder.slice(); // for TOC splice reference
-  // Add visible CS panels in curator order
+  var staticPanels = printOrder.slice();
   curatorState.forEach(function(s){
     if(s.visible) printOrder.push('p-cs' + s.id);
   });
   printOrder.splice(staticPanels.length, 0, 'p-cs-toc');
   printOrder.push('p-close');
 
-  // Mark all panels: hide non-print ones
   document.querySelectorAll('.panel').forEach(function(p){
     if(printOrder.indexOf(p.id) === -1){
       p.classList.add('print-hidden');
@@ -740,7 +754,6 @@ document.getElementById('curatorExportBtn').addEventListener('click', function()
     }
   });
 
-  // Build print TOC
   var tocList = document.getElementById('tocList');
   tocList.innerHTML = '';
   curatorState.filter(function(s){return s.visible;}).forEach(function(s,i){
@@ -751,19 +764,16 @@ document.getElementById('curatorExportBtn').addEventListener('click', function()
     tocList.appendChild(row);
   });
 
-  // Expand all accordions
+  document.que
   document.querySelectorAll('.abody').forEach(function(b){
     b.style.maxHeight = 'none';
     b.style.paddingBottom = '14px';
   });
 
-  // Close curator
   closeCurator();
 
-  // Print
   setTimeout(function(){
     window.print();
-    // Restore after print dialog closes
     setTimeout(function(){
       document.querySelectorAll('.panel').forEach(function(p){
         p.classList.remove('print-hidden');

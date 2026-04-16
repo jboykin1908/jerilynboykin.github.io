@@ -96,6 +96,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0e0e0e;display:flex
 .vdesc{font-family:'Crimson Pro',serif;font-size:1.05rem;line-height:1.65;color:var(--taupe);font-weight:300;}
 #p-ai{display:none;grid-template-columns:1fr 1fr;}
 #p-ai.on{display:grid !important;}
+#p-culturelens{display:none;grid-template-columns:1fr 1fr;}
+#p-culturelens.on{display:grid !important;}
 .ai-l{background:var(--forest);padding:36px 50px 28px;display:flex;flex-direction:column;justify-content:flex-start;}
 .aip{font-family:'Crimson Pro',serif;font-size:1.15rem;color:var(--cream);line-height:1.75;font-weight:300;margin-top:4.5rem;}
 .ai-r{background:var(--cream-light);padding:36px 50px 28px;display:flex;flex-direction:column;justify-content:center;gap:1.1rem;}
@@ -110,6 +112,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0e0e0e;display:flex
 .aitool{font-family:'DM Mono',monospace;font-size:0.42rem;letter-spacing:0.09em;text-transform:uppercase;color:var(--olive);border:1px solid var(--sage);padding:0.16rem 0.36rem;}
 #p-expertise{background:var(--forest);padding:80px 100px;}
 #p-expertise.on{display:flex !important;align-items:center;justify-content:center;}
+#p-expertise-product.on{display:flex !important;align-items:center;justify-content:center;}
 .exp-quote{font-family:'Playfair Display',serif;font-size:2rem;font-weight:400;line-height:1.55;color:var(--cream);text-align:center;max-width:820px;}
 .exp-quote em{font-style:italic;color:var(--sage);}
 #p-leadership{display:none;background:var(--cream);padding:36px 50px 28px;flex-direction:column;justify-content:flex-start;}
@@ -242,11 +245,14 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0e0e0e;display:flex
 
   #p-ai { display:grid !important; background:var(--forest) !important; }
 
+  #p-culturelens { display:grid !important; grid-template-columns:1fr 1fr; background:var(--forest) !important; }
+
   #p-leadership { display:flex !important; background:var(--cream) !important; padding:48px 64px; }
   .abody { max-height:none !important; padding-bottom:10px !important; overflow:visible !important; }
 
   #p-expertise { display:flex !important; background:var(--forest) !important; align-items:center; justify-content:center; }
 
+  #p-expertise-product { display:flex !important; background:var(--forest) !important; align-items:center; justify-content:center; }
   #p-cs-index { display:none !important; }
   #p-cs-toc { display:flex !important; flex-direction:column; background:var(--forest) !important; padding:48px 64px; height:100vh; max-height:100vh; page-break-after:always !important; break-after:page !important; }
   .toc-eyebrow-print { font-family:'DM Mono',monospace; font-size:0.52rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--sage); display:block; margin-bottom:10px; }
@@ -282,13 +288,13 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0e0e0e;display:flex
     <div class="nav-top">
       <span class="nav-eyebrow">Research Portfolio &middot; 2026</span>
       <div class="nav-name">Jerilyn Boykin</div>
-      <div class="nav-role">Mixed Methods Researcher</div>
+      <div class="nav-role">Product &amp; Marketing Researcher</div>
     </div>
     <div class="nav-scroll" id="navScroll">
       <span class="nav-group">Profile</span>
       <button class="nbtn on" data-panel="p-about"><span class="nbtn-num"></span><span class="nbtn-label">About Me</span></button>
       <button class="nbtn" data-panel="p-work"><span class="nbtn-num"></span><span class="nbtn-label">Work History</span></button>
-      <button class="nbtn" data-panel="p-expertise"><span class="nbtn-num"></span><span class="nbtn-label">My Expertise</span></button>
+      <button class="nbtn" id="expertiseNavBtn" data-panel="p-expertise"><span class="nbtn-num"></span><span class="nbtn-label">My Expertise</span></button>
       <div class="nav-sep"></div>
       <span class="nav-group" id="approachNavGroup">Approach</span>
       <div id="approachNav"></div>
@@ -324,10 +330,10 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0e0e0e;display:flex
       <div class="wcols" style="flex:1;">
         <div class="wleft">
           <div>
-            <div class="wrow"><span class="wdate">2023&ndash;Now</span><div><div class="wco">Block</div><div class="wrole">Market Insights Researcher</div><div class="wdept">Cash App &amp; Afterpay</div><span class="wtag">Fin-tech</span></div></div>
-            <div class="wrow"><span class="wdate">2020&ndash;2023</span><div><div class="wco">Meta</div><div class="wrole">Market Insights Researcher</div><div class="wdept">Instagram</div><span class="wtag">Social Media / Tech</span></div></div>
+            <div class="wrow"><span class="wdate">2023&ndash;Now</span><div><div class="wco">Block</div><div class="wrole">Researcher, Commerce &amp; Payments</div><div class="wdept">Cash App &amp; Afterpay</div><span class="wtag">Fin-tech</span></div></div>
+            <div class="wrow"><span class="wdate">2020&ndash;2023</span><div><div class="wco">Meta</div><div class="wrole">Researcher, Instagram Shop</div><div class="wdept">Instagram</div><span class="wtag">Social Media / Tech</span></div></div>
             <div class="wrow"><span class="wdate">2018&ndash;2020</span><div><div class="wco">Viacom</div><div class="wrole">Sr. Director of Insights</div><div class="wdept">BET</div><span class="wtag">Entertainment / Media</span></div></div>
-            <div class="wrow"><span class="wdate">2016&ndash;2018</span><div><div class="wco">Tory Burch</div><div class="wrole">Sr. Manager, Market Research</div><span class="wtag">Fashion / Retail</span></div></div>
+            <div class="wrow"><span class="wdate">2016&ndash;2018</span><div><div class="wco">Tory Burch</div><div class="wrole">Sr Manager, Market &amp; Brand Research</div><span class="wtag">Fashion / Retail</span></div></div>
             <div class="wrow"><span class="wdate">2014&ndash;2016</span><div><div class="wco">Neiman Marcus Group</div><div class="wrole">Manager, Market Research</div><span class="wtag">Fashion / Retail</span></div></div>
           </div>
           <div class="wstats">
@@ -347,12 +353,15 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0e0e0e;display:flex
           <div>
             <span class="slabel">Skills</span>
             <div class="sklist">
-              <span class="wtag">Survey Design</span><span class="wtag">Qual Moderation</span>
-              <span class="wtag">Usability Testing</span><span class="wtag">A/B Testing</span>
-              <span class="wtag">Conjoint, Maxdiff &amp; TURF</span><span class="wtag">Vendor Management</span>
-              <span class="wtag">Regression Modeling</span><span class="wtag">Longitudinal Tracking</span>
-              <span class="wtag">SPSS / SAS / Qualtrics</span><span class="wtag">Research Roadmap Dev.</span>
-              <span class="wtag">Stakeholder Influence</span><span class="wtag">AI-Assisted Research</span>
+              <span class="wtag">Go-to-market Strategy</span><span class="wtag">Product-Market Fit</span>
+              <span class="wtag">Positioning &amp; Messaging</span><span class="wtag">Creative Asset Evaluation</span>
+              <span class="wtag">Campaign Measurement</span><span class="wtag">Monetization &amp; Pricing</span>
+              <span class="wtag">Market Sizing (TAM)</span><span class="wtag">Segmentation</span>
+              <span class="wtag">AI-Assisted Research</span><span class="wtag">A/B Testing</span>
+              <span class="wtag">Conjoint, Maxdiff &amp; TURF</span><span class="wtag">Regression Modeling</span>
+              <span class="wtag">Longitudinal Tracking</span><span class="wtag">SPSS / SAS / Qualtrics</span>
+              <span class="wtag">Research Roadmap Dev.</span><span class="wtag">Stakeholder Influence</span>
+              <span class="wtag">Vendor Management</span>
             </div>
           </div>
         </div>
@@ -373,7 +382,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0e0e0e;display:flex
       <div class="ai-l">
         <span class="eyebrow">Applied Skills</span>
         <div class="aih">AI in <em>Research</em></div>
-        <div class="aip">My take on AI: the buzz is loud, but the opportunity is real. I embrace it more every day (and most days, I really love it).<br><br>While I enjoy combing through data and refining survey questions, <span style="color:var(--sage);">I've learned</span> <span style="color:var(--sage);">my real value lies in intuition, judgment, and a deep understanding of the people I'm building for.</span><br><br>I see AI not just as a tool to give me time back, but as a way to level the playing field — making my work more accessible to others, and opening up access to new skills for me. That's how I'm using it today.</div>
+        <div class="aip">My take on AI: the buzz is loud, but the opportunity is real. I broaden my skills through AI, almost <em>everyday.</em><br><br>While I enjoy combing through data and refining survey questions, <span style="color:var(--sage);">I've learned</span> <span style="color:var(--sage);">my real value lies in intuition, judgment, and a deep understanding of the people I'm building for.</span><br><br>I see AI not just as a tool to give me time back, but as a way to level the playing field — making my insights queryable and accessible across the org, and opening up access to new skills for me. That's how I'm using it today.</div>
       </div>
       <div class="ai-r">
         <p class="ai-intro" style="font-size:1.5rem;">How I use AI:</p>
@@ -382,6 +391,57 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0e0e0e;display:flex
         <div class="aicard"><div class="aicard-lbl">Synthesis &amp; Analysis</div><div class="aicard-txt">AI-assisted lit reviews, text data mining, competitive research, and cross-tabulations.</div></div>
         <div class="aicard"><div class="aicard-lbl">Brief &amp; Survey Development</div><div class="aicard-txt">First-draft discussion guides, surveys, and briefs.</div></div>
         <div class="aitools"><span class="aitool">Automated Analysis</span><span class="aitool">Custom Agents</span><span class="aitool">Cursor</span><span class="aitool">Goose</span><span class="aitool">Claude</span><span class="aitool">ChatGPT</span><span class="aitool">Gemini</span></div>
+      </div>
+    </div>
+    <div class="panel" id="p-culturelens">
+      <div class="ai-l" style="justify-content:flex-start;gap:0.9rem;overflow-y:auto;">
+        <span class="eyebrow">AI Research Instrument</span>
+        <div class="aih">Culture<em>Lens</em></div>
+        <div style="font-family:'DM Mono',monospace;font-size:0.44rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--taupe);margin-top:-4px;">Designed &amp; built by me &middot; 2026</div>
+        <p class="aip" style="margin-top:0.5rem;font-size:0.95rem;line-height:1.65;">An AI-augmented platform that helps researchers understand what's trending, why it matters, and how it shows up differently around the world — in seconds instead of days. Built across four modules:</p>
+        <div style="display:flex;flex-direction:column;gap:0.45rem;margin-top:0.2rem;">
+          <div class="aicard"><div class="aicard-lbl">01 &mdash; Trend Discovery</div><div class="aicard-txt">Surfaces 7 emerging cultural trends by category and market, with signal strength and heat level.</div></div>
+          <div class="aicard"><div class="aicard-lbl">02 &mdash; Zeitgeist Digest</div><div class="aicard-txt">Deep-dives any trend — drivers, platform breakdown, audience profile by age, gender, and interest group.</div></div>
+          <div class="aicard"><div class="aicard-lbl">03 &mdash; Semiotics Lab</div><div class="aicard-txt">Upload an image or describe a cultural artifact. Get a structured semiotic analysis with strategic implications.</div></div>
+          <div class="aicard"><div class="aicard-lbl">04 &mdash; Global Localizer</div><div class="aicard-txt">Translates any macro trend into local expressions across USA, UK, Brazil, South Korea, and Nigeria.</div></div>
+        </div>
+        <div class="aitools" style="margin-top:0.5rem;">
+          <span class="aitool">Anthropic API</span>
+          <span class="aitool">React</span>
+          <span class="aitool">Custom Research Frameworks</span>
+          <span class="aitool">Semiotics</span>
+          <span class="aitool">Trend Forecasting</span>
+        </div>
+      </div>
+      <div style="background:var(--cream-light);padding:16px 16px 16px 20px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
+        <div style="position:relative;width:100%;display:flex;align-items:center;justify-content:center;">
+
+          <!-- Composition wrapper: 20% smaller than before -->
+          <div style="position:relative;width:100%;height:640px;">
+
+            <!-- Input image: small, top-left, behind output -->
+            <div style="position:absolute;top:0;left:0;width:34%;z-index:1;display:flex;flex-direction:column;gap:4px;">
+              <div style="font-family:'DM Mono',monospace;font-size:0.34rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--taupe);text-align:left;">Input &mdash; @strongblacklead &middot; Apr 11, 2026</div>
+              <img src="culturelens_semiotic2.png" alt="Netflix Strong Black Lead meme input" style="width:100%;object-fit:contain;display:block;box-shadow:0 6px 20px rgba(0,0,0,0.18);">
+            </div>
+
+            <!-- 90-degree SVG arrow: from bottom of input image down, then right stopping before output -->
+            <div style="position:absolute;top:230px;left:4%;z-index:3;width:90px;height:80px;">
+              <svg width="90" height="80" viewBox="0 0 90 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <line x1="20" y1="0" x2="20" y2="60" stroke="#8FA688" stroke-width="1.5"/>
+                <line x1="20" y1="60" x2="90" y2="60" stroke="#8FA688" stroke-width="1.5"/>
+                <polyline points="83,53 90,60 83,67" stroke="#8FA688" stroke-width="1.5" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+              </svg>
+            </div>
+
+            <!-- Output image: large, pushed down so only top-left corner overlaps with bottom-right of input -->
+            <div style="position:absolute;top:210px;right:-8px;width:76%;z-index:2;display:flex;flex-direction:column;gap:4px;">
+              <img src="culturelens_semiotic1.png" alt="Semiotics Lab analysis output" style="width:100%;object-fit:contain;display:block;box-shadow:0 10px 36px rgba(0,0,0,0.18);">
+              <div style="font-family:'DM Mono',monospace;font-size:0.34rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--taupe);text-align:left;">Output &mdash; Semiotics Lab Analysis</div>
+            </div>
+
+          </div>
+        </div>
       </div>
     </div>
     <div class="panel" id="p-leadership">
@@ -397,8 +457,14 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0e0e0e;display:flex
     </div>
     <div class="panel" id="p-expertise">
       <div style="display:flex;flex-direction:column;align-items:center;gap:2rem;">
-        <div style="font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--sage);">Product &nbsp;|&nbsp; Brand</div>
-        <div class="exp-quote">My expertise sits at the intersection of product and brand: <em>understanding not just how people use and experience products, but what drives the decisions they make,</em> what they believe about brands, and how all of it connects to business outcomes.</div>
+        <div style="font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--sage);">Market &nbsp;|&nbsp; Product</div>
+        <div class="exp-quote">My expertise sits at the intersection of marketing and product: <em>understanding not just how people use and experience products, but what drives the decisions they make,</em> what they believe about brands, and how all of it connects to business outcomes.</div>
+      </div>
+    </div>
+    <div class="panel" id="p-expertise-product" style="background:var(--forest);display:none;align-items:center;justify-content:center;">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:2rem;">
+        <div style="font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--sage);">Product &nbsp;|&nbsp; Market</div>
+        <div class="exp-quote">My expertise sits at the intersection of product and marketing: <em>understanding not just what drives the decisions people make, but how they use and experience products,</em> how those experiences shape what they believe about brands, and how all of it connects to business outcomes.</div>
       </div>
     </div>
     <div class="panel" id="p-close">
@@ -430,7 +496,9 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0e0e0e;display:flex
       <div class="curator-hint">Shift+E to close</div>
     </div>
     <div class="curator-body" id="curatorBody">
-      <span class="curator-section">Approach</span>
+      <span class="curator-section">Profile Variants</span>
+      <div id="curatorExpertise"></div>
+      <span class="curator-section" style="margin-top:6px;">Approach</span>
       <div id="curatorApproach"></div>
       <span class="curator-section" style="margin-top:6px;">Selected Work</span>
       <div id="curatorCases"></div>
@@ -512,24 +580,30 @@ scaleToFit();
 window.addEventListener('resize',scaleToFit);
 
 var APPROACH = [
-  {id:'p-values', label:'Research Philosophy'},
-  {id:'p-ai',     label:'AI in Research'},
-  {id:'p-leadership', label:'Research Leadership'}
+  {id:'p-values',            label:'Research Philosophy'},
+  {id:'p-ai',                label:'AI in Research'},
+  {id:'p-culturelens',       label:'AI Case Study'},
+  {id:'p-leadership',        label:'Research Leadership'}
 ];
 var approachState = [
-  {id:'p-values',     label:'Research Philosophy', visible:true},
-  {id:'p-ai',         label:'AI in Research',       visible:true},
-  {id:'p-leadership', label:'Research Leadership',  visible:false}
+  {id:'p-values',            label:'Research Philosophy',      visible:true},
+  {id:'p-ai',                label:'AI in Research',           visible:true},
+  {id:'p-culturelens',       label:'AI Case Study',            visible:true},
+  {id:'p-leadership',        label:'Research Leadership',      visible:false}
+];
+var expertiseVariants = [
+  {id:'p-expertise',         label:'My Expertise (Marketing Lead)', visible:false},
+  {id:'p-expertise-product', label:'My Expertise (Product Lead)',   visible:true}
 ];
 var curatorState = [
-  {id:8, visible:true},
-  {id:7, visible:true},
-  {id:4, visible:true},
-  {id:5, visible:true},
-  {id:6, visible:true},
-  {id:2, visible:false},
-  {id:1, visible:false},
-  {id:3, visible:false}
+  {id:8, visible:true},   // Cash App Mobile Redesign
+  {id:7, visible:true},   // Cash App Reskin
+  {id:4, visible:true},   // Afterpay Pricing Opportunities
+  {id:5, visible:true},   // Afterpay Mobile App Integration
+  {id:2, visible:true},   // Launching BET+
+  {id:6, visible:true},   // Understanding Needs of Black Creators
+  {id:3, visible:false},  // Afterpay Brand Diagnosis
+  {id:1, visible:false}   // Cash App "Cash In" Campaign
 ];
 
 function getCaseById(id){
@@ -711,8 +785,45 @@ function renderCuratorRows(){
   document.getElementById('curatorCount').textContent = (visCS+visAP) + ' of ' + (curatorState.length+approachState.length) + ' slides visible';
 }
 
+function renderExpertiseRows(){
+  var body = document.getElementById('curatorExpertise');
+  if(!body) return;
+  body.innerHTML = '';
+  expertiseVariants.forEach(function(s, idx){
+    var row = document.createElement('div');
+    row.className = 'curator-row' + (s.visible ? '' : ' hidden-case');
+
+    var vis = document.createElement('button');
+    vis.className = 'curator-vis' + (s.visible ? ' on' : '');
+    vis.innerHTML = s.visible
+      ? '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>'
+      : '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>';
+    vis.addEventListener('click', function(){
+      // radio behaviour: activate this one, deactivate the other
+      expertiseVariants.forEach(function(v, i){ v.visible = (i === idx); });
+      applyExpertiseNav();
+      renderExpertiseRows();
+    });
+
+    var info = document.createElement('div');
+    info.className = 'curator-info';
+    info.innerHTML = '<div class="curator-case-title">'+s.label+'</div>';
+
+    row.appendChild(vis);
+    row.appendChild(info);
+    body.appendChild(row);
+  });
+}
+
+function applyExpertiseNav(){
+  var active = expertiseVariants.find(function(v){ return v.visible; });
+  var btn = document.getElementById('expertiseNavBtn');
+  if(btn && active) btn.dataset.panel = active.id;
+}
+
 function openCurator(){
   renderApproachRows();
+  renderExpertiseRows();
   renderCuratorRows();
   document.getElementById('curator-overlay').classList.add('open');
 }
@@ -732,6 +843,7 @@ document.addEventListener('keydown', function(e){
 });
 
 applyApproachNav();
+applyExpertiseNav();
 applyOrder();
 
 document.getElementById('curatorExportBtn').addEventListener('click', function() {
